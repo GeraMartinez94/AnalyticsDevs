@@ -1,18 +1,18 @@
 .contact-section {
   padding: 60px 0;
-  background-color: var(--light-blue-bg); /* Fondo azul claro similar al de nosotros */
+  background-color: #fff;
 }
 
 .page-title {
   font-size: 3em;
-  font-weight: 700;
-  color: var(--primary-blue);
+  font-weight: bold;
+  color: #3f51b5; /* Color primario de Indigo-Pink */
   margin-bottom: 30px;
 }
 
 .page-description {
   font-size: 1.1em;
-  color: var(--text-medium);
+  color: #555;
   max-width: 900px;
   margin: 0 auto 40px;
   line-height: 1.6;
@@ -22,12 +22,11 @@
   max-width: 600px;
   margin: 0 auto 50px;
   padding: 20px;
-  box-shadow: 0 4px 15px var(--shadow-medium);
-  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease-out;
 }
 .contact-form-card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 .contact-form {
@@ -46,30 +45,20 @@
   font-size: 1.1em;
   margin-top: 10px;
   transition: transform 0.2s ease-out, background-color 0.2s ease-out;
-  background-color: var(--primary-blue); /* Botón con el azul primario */
-  color: var(--text-light);
 }
 .contact-form button:hover {
   transform: translateY(-2px);
-  background-color: var(--secondary-blue); /* Cambio de color al hover */
 }
 
 .contact-info {
   margin-top: 40px;
-  color: var(--text-medium);
-  padding: 20px;
-  border: 1px dashed var(--border-light); /* Borde punteado como en algunos sitios */
-  border-radius: 8px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  color: #555;
 }
 
 .contact-info-title {
   font-size: 1.6em;
   font-weight: bold;
   margin-bottom: 20px;
-  color: var(--primary-blue);
 }
 
 .contact-detail {
@@ -90,4 +79,5 @@
   .contact-form {
     gap: 15px;
   }
+  
 }

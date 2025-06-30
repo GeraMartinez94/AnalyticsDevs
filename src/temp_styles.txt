@@ -1,0 +1,99 @@
+/* Importa uno de los temas pre-construidos de Angular Material.
+   Mantendremos 'indigo-pink' porque es el que tenías y su estructura base funciona.
+   Los colores personalizados los manejaremos con CSS directamente.
+*/
+
+/* --- Variables de Color Personalizadas (CSS Variables) --- */
+/* Esto facilita el cambio de colores en el futuro y mantiene consistencia */
+:root {
+  --primary-blue: #004d7f; /* Azul oscuro y profundo */
+  --secondary-blue: #0087c0; /* Azul ligeramente más claro para acentos y hover */
+  --light-blue-bg: #e0f7fa; /* Fondo azul muy claro */
+  --text-dark: #333333;
+  --text-medium: #666666;
+  --text-light: #ffffff;
+  --border-light: #e0e0e0;
+  --shadow-light: rgba(0, 0, 0, 0.1);
+  --shadow-medium: rgba(0, 0, 0, 0.15);
+}
+
+
+/* Estilos globales y reseteos necesarios para el HTML y body */
+html, body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif; /* Roboto es similar a la que usan */
+  color: var(--text-dark); /* Color de texto por defecto */
+  line-height: 1.6;
+}
+
+/* Contenedor principal de contenido para centrar y limitar el ancho */
+.content-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Estilos globales para títulos de página (pueden ser sobrescritos por componentes) */
+.page-title {
+  font-size: 3em;
+  font-weight: 700; /* Más audaz */
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--primary-blue); /* Usando el nuevo azul primario */
+}
+
+.page-description {
+  font-size: 1.1em;
+  color: var(--text-medium);
+  max-width: 900px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+/* Estilos para el toolbar del app.component.html */
+.app-toolbar {
+  background-color: var(--primary-blue); /* Nuevo color de toolbar */
+  box-shadow: 0 2px 4px -1px var(--shadow-light), 0 4px 5px 0 var(--shadow-light), 0 1px 10px 0 var(--shadow-light);
+  color: var(--text-light); /* Texto blanco para el toolbar */
+}
+
+.app-toolbar .mat-mdc-button {
+  color: var(--text-light); /* Botones de navegación blancos */
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.app-toolbar .mat-mdc-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Ligeramente más visible el hover */
+  color: var(--text-light);
+}
+
+.toolbar-brand {
+  font-size: 24px;
+  font-weight: bold;
+  margin-right: 20px;
+  color: var(--text-light);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.main-content {
+  padding: 20px;
+  min-height: calc(100vh - 120px); /* Asumiendo 64px para toolbar y 56px para footer */
+}
+
+/* Estilos para el footer (será modificado más adelante con columnas) */
+.app-footer {
+  background-color: var(--primary-blue); /* Footer con el color primario */
+  color: var(--text-light);
+  padding: 40px 0; /* Más padding para el footer con columnas */
+  font-size: 0.9em;
+}

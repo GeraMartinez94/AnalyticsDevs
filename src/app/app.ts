@@ -1,25 +1,20 @@
-// src/app/app.component.ts
 import { CommonModule } from '@angular/common'; // Necesario para directivas como *ngIf, *ngFor
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router'; // RouterLink para el nav, RouterOutlet para el contenido de la ruta
+import { RouterLink, RouterOutlet } from '@angular/router'; // RouterLink para el nav, RouterOutlet para el contenido de la ruta
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-declare const bootstrap: any;
-// Importa los módulos de animación, ahora que `@angular/animations` está instalado
+
 import {
   trigger,
   transition,
   style,
   query,
-  animate,
+  animate, // <-- Aquí está el módulo animate
   group,
-  animateChild // animateChild es útil para animaciones anidadas, aunque no se use directamente en este ejemplo
+  animateChild
 } from '@angular/animations';
-import { filter } from 'rxjs';
-
-
 @Component({
   selector: 'app-root',
   standalone: true, // Esto es CRUCIAL para un componente standalone
@@ -30,16 +25,14 @@ import { filter } from 'rxjs';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    // NO IMPORTES BrowserAnimationsModule aquí. Se provee globalmente en main.ts
-    // NO IMPORTES RouterModule aquí. Se provee globalmente en main.ts
   ],
   templateUrl: './app.html', // O './app.component.html' si usas esa convención
   styleUrl: './app.css',     // O './app.component.scss' si usas SCSS
-  animations: [ // Aquí van tus animaciones de ruta
+   animations: [ // Aquí van tus animaciones de ruta
     trigger('routeAnimations', [
       transition('* <=> *', [ // Aplica a todas las transiciones de ruta
         style({ position: 'relative' }), // Establece la posición relativa para el contenedor
-        query(':enter, :leave', [
+        query(':enter, :leave', [ // Selecciona los componentes que entran y salen
           style({
             position: 'absolute', // Componentes entrando/saliendo se posicionan absolutos
             top: 0,
@@ -50,31 +43,28 @@ import { filter } from 'rxjs';
           })
         ], { optional: true }), // optional: true para evitar errores si no hay :enter o :leave
         query(':enter', [
-          animate('0.5s ease-out', style({ opacity: 1, transform: 'translateX(0%)' })) // El componente que entra se desliza y desvanece
+          // DURACIÓN AJUSTADA AQUÍ DE 0.5s A 0.3s
+          animate('0.3s ease-out', style({ opacity: 1, transform: 'translateX(0%)' })) // El componente que entra se desliza y desvanece
         ], { optional: true }),
-        query(':leave', [ // Opcional: Animar la salida si quieres un efecto distinto (ej. se desvanece y va a la izquierda)
-          animate('0.5s ease-out', style({ opacity: 0, transform: 'translateX(-100%)' }))
+        query(':leave', [ // Anima la salida del componente (se desvanece y va a la izquierda)
+          // DURACIÓN AJUSTADA AQUÍ DE 0.5s A 0.3s
+          animate('0.3s ease-out', style({ opacity: 0, transform: 'translateX(-100%)' }))
         ], { optional: true })
       ]),
-      // Puedes añadir más transiciones aquí si quieres efectos específicos entre rutas
-      /*
-      transition('HomePage => AboutUsPage', [
-        // ... otra animación ...
-      ]),
-      */
     ])
   ]
 })
 export class App implements OnInit { // Asegúrate de implementar OnInit si usas ngOnInit
   protected title = 'mi-emprendimiento';
   isMobileMenuOpen = false;
-  currentYear: number = new Date().getFullYear();
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private router: Router) {
+  currentYear!: number;
+
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+    // Registra tus iconos SVG para Angular Material
     this.matIconRegistry.addSvgIcon(
       'linkedin',
       this.domSanitizer.bypassSecurityTrustResourceUrl('./public/linkedin.svg')
     );
-    // Asegúrate de registrar tus otros iconos (Facebook, Twitter, si los usas) aquí también
     this.matIconRegistry.addSvgIcon(
       'facebook',
       this.domSanitizer.bypassSecurityTrustResourceUrl('./public/facebook.svg')
@@ -83,17 +73,8 @@ export class App implements OnInit { // Asegúrate de implementar OnInit si usas
       'twitter',
       this.domSanitizer.bypassSecurityTrustResourceUrl('./public/twitter.svg')
     );
-      this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd)
-    ).subscribe(() => {
-      this.closeNavbar();
-    });
   }
- ngAfterViewInit() {
-    // Para asegurarnos de que Bootstrap esté cargado cuando intentemos inicializar
-    // cualquier componente de Bootstrap si lo necesitaramos, aunque en este caso
-    // el navbar se inicializa automáticamente si el JS está en angular.json.
-  }
+
   ngOnInit() {
     this.currentYear = new Date().getFullYear();
   }
@@ -109,22 +90,5 @@ export class App implements OnInit { // Asegúrate de implementar OnInit si usas
   // Función necesaria para pasar el 'data.animation' al trigger en el HTML
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-  }
-  closeNavbar() {
-    // Obtener el elemento del botón que abre/cierra el navbar
-    const navbarToggler = document.getElementById('navbarToggler');
-    // Obtener el elemento del collapse
-    const navbarCollapse = document.getElementById('navbarNav');
-
-    // Comprobar si el navbar está abierto (clase 'show' presente) y si estamos en una vista móvil
-    // La clase 'collapsing' indica que está en proceso de abrirse o cerrarse.
-    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
-      // Usar la API de JavaScript de Bootstrap para colapsar el menú
-      // Esta es la forma más robusta y recomendada.
-      const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse, { toggle: false });
-      if (bsCollapse) {
-        bsCollapse.hide();
-      }
-    }
   }
 }

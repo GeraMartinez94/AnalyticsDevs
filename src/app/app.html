@@ -1,84 +1,77 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-  <div class="container">
-    <button id="navbarToggler" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeNavbar()">Inicio</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/nosotros" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeNavbar()">Nosotros</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/servicios" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeNavbar()">Servicios</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contacto" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeNavbar()">Contacto</a>
-        </li>
-      </ul>
-    </div>
-  </div>
+<mat-toolbar color="primary" class="app-toolbar">
+  <span class="spacer"></span>
+  <nav class="desktop-nav">
+    <button mat-button [routerLink]="['/']">Inicio</button>
+    <button mat-button [routerLink]="['/nosotros']">Nosotros</button>
+    <button mat-button [routerLink]="['/servicios']">Servicios</button>
+    <button mat-button [routerLink]="['/contacto']">Contacto</button>
+  </nav>
+  <button mat-icon-button class="mobile-menu-button" (click)="toggleMobileMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
+
+<nav [class.open]="isMobileMenuOpen" class="mobile-nav">
+  <button mat-button [routerLink]="['/']" (click)="closeMobileMenu()">Inicio</button>
+  <button mat-button [routerLink]="['/nosotros']" (click)="closeMobileMenu()">Nosotros</button>
+  <button mat-button [routerLink]="['/servicios']" (click)="closeMobileMenu()">Servicios</button>
+  <button mat-button [routerLink]="['/contacto']" (click)="closeMobileMenu()">Contacto</button>
 </nav>
 
-<div style="padding-top: 56px;">
-  <main class="main-content">
-    <router-outlet></router-outlet>
-  </main>
-</div>
 
-<section class="global-call-to-action text-white py-5 my-5 bg-dark">
-  <div class="container text-center">
-    <h2 class="display-5 mb-3">¿Tienes dudas? Consulta con nuestros expertos.</h2>
-    <p class="lead mb-4">Estamos aquí para ayudarte a encontrar la solución perfecta para tu negocio.</p>
-    <a class="btn btn-primary btn-lg" routerLink="/contacto">
-      Contactar Ahora
-    </a>
+<main class="app-main-content">
+  <div [@routeAnimations]="prepareRoute(outlet)" class="router-outlet-wrapper">
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
+</main>
+
+<section class="global-call-to-action">
+  <div class="content-container text-center">
+    <h2>¿Listo para llevar tu negocio al siguiente nivel?</h2>
+    <p>Contáctanos hoy mismo para una consulta gratuita y descubre cómo podemos ayudarte.</p>
+    <button mat-raised-button color="accent" [routerLink]="['/contacto']">¡Hablemos!</button>
   </div>
 </section>
 
-<footer class="app-footer bg-dark text-white py-4">
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-3 mb-3">
-        <h3 class="footer-logo mb-2">AnalyticsDevs</h3>
-        <p class="text-white-50">Soluciones innovadoras para impulsar tu negocio.</p>
+<footer class="app-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3 class="footer-logo">{{ title }}</h3>
+        <p>Soluciones innovadoras para el crecimiento de tu negocio.</p>
       </div>
-
-      <div class="col-12 col-md-3 mb-3">
+      <div class="footer-col">
         <h4>Navegación</h4>
-        <ul class="list-unstyled">
-          <li><a class="text-white-50 text-decoration-none" routerLink="/">Inicio</a></li>
-          <li><a class="text-white-50 text-decoration-none" routerLink="/nosotros">Nosotros</a></li>
-          <li><a class="text-white-50 text-decoration-none" routerLink="/servicios">Servicios</a></li>
-          <li><a class="text-white-50 text-decoration-none" routerLink="/contacto">Contacto</a></li>
+        <ul>
+          <li><a [routerLink]="['/']">Inicio</a></li>
+          <li><a [routerLink]="['/nosotros']">Nosotros</a></li>
+          <li><a [routerLink]="['/servicios']">Servicios</a></li>
+          <li><a [routerLink]="['/contacto']">Contacto</a></li>
         </ul>
       </div>
-
-      <div class="col-12 col-md-3 mb-3">
+      <div class="footer-col">
         <h4>Contacto</h4>
-        <ul class="list-unstyled">
-          <li><p class="text-white-50 mb-1">📧 infomiemprendimiento.com</p></li>
-          <li><p class="text-white-50 mb-1">📞 +54 9 11 1234-5678</p></li>
-          <li><p class="text-white-50 mb-1">📍 Calle Ficticia 123, Garupá, Misiones</p></li>
-        </ul>
+        <p>Email: infomiemprendimiento.com</p>
+        <p>Teléfono: +123 456 7890</p>
+        <p>Dirección: Calle Falsa 123, Ciudad, País</p>
       </div>
-
-      <div class="col-12 col-md-3 mb-3">
+      <div class="footer-col">
         <h4>Síguenos</h4>
-        <div class="social-links d-flex">
-          <a href="https://www.linkedin.com/company/analytics-devs-consulting/" target="_blank" aria-label="LinkedIn" class="me-2">
-            <img src="assets/img/linkedin-icon.png" alt="LinkedIn" class="social-media-icon" style="width: 30px; height: 30px;">
+        <div class="social-links">
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+            <mat-icon svgIcon="facebook" class="social-media-icon"></mat-icon>
           </a>
-           <a href="#" target="_blank" aria-label="Otro Social Media" class="me-2">
-            </a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+            <mat-icon svgIcon="twitter" class="social-media-icon"></mat-icon>
+          </a>
+          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+            <mat-icon svgIcon="linkedin" class="social-media-icon"></mat-icon>
+          </a>
         </div>
       </div>
     </div>
-    <hr class="text-white-50 my-3">
-    <div class="text-center text-white-50">
-      <p>&copy; {{ currentYear }} AnalyticsDevs. Todos los derechos reservados.</p>
+    <div class="footer-bottom-text">
+      <p>&copy; {{ currentYear }} {{ title }}. Todos los derechos reservados.</p>
     </div>
   </div>
 </footer>

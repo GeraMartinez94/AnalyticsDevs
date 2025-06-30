@@ -1,79 +1,144 @@
-/* src/app/pages/home/home.component.scss */
+/* src/app/inicio/inicio.component.scss */
 
-/* --- Hero Section --- */
-.home-hero-section {
-  background: url('/assets/img/hero-bg.jpg') no-repeat center center/cover; /* Asegúrate de la ruta de tu imagen de fondo */
-  min-height: 500px; /* Altura mínima para el hero */
-  position: relative; /* Para el overlay */
-  overflow: hidden; /* Asegura que el pseudo-elemento no se desborde */
-  padding: 80px 0; /* Padding general para el contenido del hero */
+/* --- Hero Section Styles --- */
+.hero-section {
+  min-height: calc(100vh - 64px); /* Altura mínima de la sección hero */
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido */
+  padding-top: 64px; /* Espacio para el navbar fijo */
+  padding-bottom: var(--spacing-xl); /* py-5 para la sección entera */
+  background-color: var(--primary-blue); /* Fondo azul principal para el Hero */
+  color: var(--text-light); /* Texto blanco para el Hero */
 }
 
-/* Overlay para la imagen de fondo del Hero */
-.home-hero-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Oscurece la imagen de fondo */
-    z-index: 0; /* Asegura que esté detrás del contenido */
+.hero-section .container {
+  padding-top: var(--spacing-md); /* Puedes ajustar si necesitas más o menos padding interno del container */
+  padding-bottom: var(--spacing-md);
 }
 
-.hero-content {
-  position: relative; /* Para que el contenido esté sobre el overlay */
-  z-index: 1;
-  max-width: 900px; /* Limita el ancho del texto en pantallas grandes */
-  margin: 0 auto; /* Centra el contenido si se limita el max-width */
+.hero-section h1 {
+  font-size: 3.5rem;
+  font-weight: var(--fw-bold);
+  margin-bottom: var(--bs-spacing-3);
+  color: var(--text-light); /* Asegura que el título sea blanco */
 }
 
-.hero-title {
-  color: var(--text-light); /* Tu color para el título del hero */
-  /* Bootstrap ya maneja display-4 y fw-bold */
+@media (max-width: 767.98px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+  .hero-section .lead {
+    font-size: 1rem;
+  }
 }
 
-.hero-subtitle {
-  color: rgba(255, 255, 255, 0.9); /* Un poco más transparente que el título */
-  /* Bootstrap ya maneja lead */
+.hero-section .lead {
+  font-size: 1.5rem;
+  margin-bottom: var(--bs-spacing-4);
+  color: rgba(255, 255, 255, 0.8); /* Asegura que el texto lead sea blanco semi-transparente */
 }
 
-.highlight {
-  color: var(--secondary-blue); /* Color de acento para la palabra resaltada */
+.hero-section .highlight {
+  color: var(--secondary-blue); /* Si decides volver a usar highlights en el futuro */
 }
 
-/* --- Sección de Pilares (Features Section) --- */
-.section-title {
-  color: var(--text-dark); /* Color de tu título de sección */
-  font-size: 2.5em; /* Ajusta el tamaño de fuente si es necesario */
-  font-weight: bold;
-  margin-bottom: 40px; /* Más espacio debajo del título */
+.hero-section .mat-flat-button {
+  background-color: var(--secondary-blue);
+  color: var(--text-light);
+  padding: 0.8rem 2rem;
+  font-size: 1.25rem;
+  border-radius: 0.3rem;
+  text-transform: uppercase;
+  font-weight: var(--fw-medium);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card {
-  border: none;
-  border-radius: 8px;
-  box-shadow: var(--shadow-medium); /* Usa tu variable de sombra */
-  transition: transform 0.3s ease-in-out;
+.hero-section .mat-flat-button:hover {
+  background-color: darken(var(--secondary-blue), 10%); /* Requiere Sass; si es CSS puro, usa un valor fijo */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.card:hover {
-  transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
+
+/* --- Features/Pillars Section Styles (AJUSTADO) --- */
+.features-section {
+  padding-top: var(--spacing-xl); /* Espacio superior de la sección (60px) */
+  padding-bottom: var(--spacing-xl); /* Espacio inferior de la sección (60px) */
+  background-color: var(--light-blue-bg); /* Fondo gris claro para esta sección */
 }
 
-.card-body {
-  padding: 30px; /* Relleno dentro de la tarjeta */
+.features-section .section-title {
+  margin-bottom: var(--bs-spacing-5); /* Espacio debajo del título (48px) */
+  /* El resto de estilos para .section-title están en styles.css */
 }
 
-.card-title {
-  color: var(--primary-blue); /* Color para los títulos de las tarjetas */
-  font-size: 1.8em;
-  margin-bottom: 15px;
+/* Estilos para las tarjetas de Características/Pilares */
+.features-section .card {
+  padding: var(--bs-spacing-4); /* Padding interno de la tarjeta (24px) */
+  /* Asegúrate de que no haya un 'border' definido aquí que anule styles.css */
+  /* Si definiste box-shadow aquí, puedes mantenerlo o eliminarlo y usar el de styles.css */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-text {
-  color: var(--text-medium); /* Color para el texto de las tarjetas */
+.features-section .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem var(--shadow-medium);
 }
 
-/* Puedes eliminar cualquier media query que tuvieras aquí para las cards,
-   ya que Bootstrap con col-12 y col-md-4 lo maneja. */
+
+.features-section .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar el contenido horizontalmente */
+  padding: 0 !important; /* Elimina el padding por defecto de card-body si la tarjeta ya tiene padding */
+}
+
+.icon-wrapper {
+  background-color: var(--primary-blue);
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--bs-spacing-3);
+  box-shadow: 0 2px 4px var(--shadow-light);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: var(--text-light);
+}
+
+.features-section .card-title {
+  color: var(--primary-blue);
+  font-weight: var(--fw-semibold);
+  font-size: 1.5rem;
+  margin-bottom: var(--bs-spacing-2);
+}
+
+.features-section .card-text {
+  color: var(--text-medium);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 575.98px) {
+  .features-section .card {
+    padding: var(--bs-spacing-3);
+  }
+  .icon-wrapper {
+    width: 70px;
+    height: 70px;
+  }
+  .feature-icon {
+    font-size: 2.5rem;
+  }
+  .features-section .card-title {
+    font-size: 1.3rem;
+  }
+  .features-section .card-text {
+    font-size: 0.9rem;
+  }
+}

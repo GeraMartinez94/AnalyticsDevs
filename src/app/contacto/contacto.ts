@@ -1,24 +1,28 @@
-import { Component } from '@angular/core';
-import { MatInputModule } from '@angular/material/input';
+
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Si usas ngIf, ngFor, etc.
+
+// Módulos de Angular Material para el formulario
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';     // Para la tarjeta del formulario
-// --- Módulos de Formularios (importante para ngModel o Reactive Forms) ---
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 @Component({
   selector: 'app-contacto',
-  standalone: true,
+ standalone: true,
   imports: [
-    MatInputModule,      // Para input fields
-    MatFormFieldModule,  // Para envolver los input fields de Material
-    MatButtonModule,     // Para el botón de enviar
-    MatCardModule,       // Para la tarjeta del formulario
-    ReactiveFormsModule, // Para formularios reactivos
-    FormsModule 
+     CommonModule,
+    MatFormFieldModule, // <-- Importar
+    MatInputModule,     // <-- Importar
+    MatButtonModule 
   ],
   templateUrl: './contacto.html',
-  styleUrl: './contacto.css'
+  styleUrl: './contacto.css',
+   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ContactoComponent {
+export class ContactoComponent  implements OnInit {
+  constructor() { }
 
+  ngOnInit(): void {
+  }
 }

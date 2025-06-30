@@ -1,100 +1,381 @@
-/* Importa uno de los temas pre-construidos de Angular Material.
-   Mantendremos 'indigo-pink' porque es el que tenías y su estructura base funciona.
-   Los colores personalizados los manejaremos con CSS directamente.
-*/
+/* src/styles.css */
 
-/* --- Variables de Color Personalizadas (CSS Variables) --- */
-/* Esto facilita el cambio de colores en el futuro y mantiene consistencia */
+/* --- Variables de Diseño --- */
 :root {
-  --primary-blue: #004d7f; /* Azul oscuro y profundo */
-  --secondary-blue: #0087c0; /* Azul ligeramente más claro para acentos y hover */
-  --light-blue-bg: #e0f7fa; /* Fondo azul muy claro */
-  --text-dark: #333333;
-  --text-medium: #666666;
-  --text-light: #ffffff;
-  --border-light: #e0e0e0;
-  --shadow-light: rgba(0, 0, 0, 0.1);
-  --shadow-medium: rgba(0, 0, 0, 0.15);
+  --primary-blue: #004d7f;       /* Azul oscuro para títulos, iconos, toolbar */
+  --secondary-blue: #0087c0;    /* Azul más claro para highlights y acentos */
+  --light-blue-bg: #f5f5f5;     /* Fondo gris muy claro para secciones (como "Nuestros Servicios") */
+  --text-dark: #333333;         /* Texto principal oscuro */
+  --text-medium: #666666;       /* Texto secundario, descripciones, párrafos */
+  --text-light: #ffffff;        /* Texto en fondos oscuros (toolbar, footer) */
+
+  /* Variables de sombra */
+  --shadow-light: rgba(0, 0, 0, 0.1);    /* Sombra suave para tarjetas y elementos elevados */
+  --shadow-medium: rgba(0, 0, 0, 0.15);  /* Sombra un poco más pronunciada para hover o elementos importantes */
+  --border-light: #e0e0e0;       /* Color de borde para tarjetas, inputs */
+
+  /* Espaciado general (pueden ser útiles como variables) */
+  --spacing-xs: 5px;
+  --spacing-sm: 10px;
+  --spacing-md: 20px;
+  --spacing-lg: 40px;
+  --spacing-xl: 60px; /* 60px para py-5 de secciones */
+
+  /* Bootstrap-like spacing scale (para m-X, p-X utilidades y gutters) */
+  --bs-spacer: 1rem; 
+  --bs-spacing-0: 0;
+  --bs-spacing-1: calc(var(--bs-spacer) * 0.25);   /* 4px */
+  --bs-spacing-2: calc(var(--bs-spacer) * 0.5);    /* 8px */
+  --bs-spacing-3: var(--bs-spacer);                /* 16px */
+  --bs-spacing-4: calc(var(--bs-spacer) * 1.5);    /* 24px */
+  --bs-spacing-5: calc(var(--bs-spacer) * 3);      /* 48px */
+
+  /* Font Weights (si no los tienes ya) */
+  --fw-light: 300;
+  --fw-normal: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
 }
 
-
-/* Estilos globales y reseteos necesarios para el HTML y body */
+/* --- Estilos Base para HTML y Body --- */
 html, body {
   height: 100%;
 }
+
 body {
   margin: 0;
-  font-family: 'Roboto', 'Helvetica Neue', sans-serif; /* Roboto es similar a la que usan */
-  color: var(--text-dark); /* Color de texto por defecto */
-  line-height: 1.6;
-}
-
-/* Contenedor principal de contenido para centrar y limitar el ancho */
-.content-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.text-center {
-  text-align: center;
-}
-
-/* Estilos globales para títulos de página (pueden ser sobrescritos por componentes) */
-.page-title {
-  font-size: 3em;
-  font-weight: 700; /* Más audaz */
-  text-align: center;
-  margin-bottom: 30px;
-  color: var(--primary-blue); /* Usando el nuevo azul primario */
-}
-
-.page-description {
-  font-size: 1.1em;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
   color: var(--text-medium);
-  max-width: 900px;
-  margin: 0 auto 40px;
   line-height: 1.6;
+  background-color: #ffffff;
 }
 
-/* Estilos para el toolbar del app.component.html */
-.app-toolbar {
-  background-color: var(--primary-blue); /* Nuevo color de toolbar */
-  box-shadow: 0 2px 4px -1px var(--shadow-light), 0 4px 5px 0 var(--shadow-light), 0 1px 10px 0 var(--shadow-light);
-  color: var(--text-light); /* Texto blanco para el toolbar */
+/* --- Estilos Globales de Tipografía y Encabezados --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--text-dark);
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+  line-height: 1.2;
 }
 
-.app-toolbar .mat-mdc-button {
-  color: var(--text-light); /* Botones de navegación blancos */
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; }
+h3 { font-size: 1.75em; }
+h4 { font-size: 1.5em; }
+h5 { font-size: 1.25em; }
+h6 { font-size: 1em; }
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
 }
 
-.app-toolbar .mat-mdc-button:hover {
-  background-color: rgba(255, 255, 255, 0.2); /* Ligeramente más visible el hover */
-  color: var(--text-light);
+a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.toolbar-brand {
-  font-size: 24px;
-  font-weight: bold;
-  margin-right: 20px;
-  color: var(--text-light);
+a:hover {
+  color: var(--secondary-blue);
+  text-decoration: underline;
 }
 
-.spacer {
-  flex: 1 1 auto;
+/* --- Clases Utilitarias Globales (Simulando Bootstrap) --- */
+
+/* Container */
+.container {
+  width: 100%;
+  padding-right: var(--bs-spacing-3);
+  padding-left: var(--bs-spacing-3);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) { .container { max-width: 540px; } }
+@media (min-width: 768px) { .container { max-width: 720px; } }
+@media (min-width: 992px) { .container { max-width: 960px; } }
+@media (min-width: 1200px) { .container { max-width: 1140px; } }
+@media (min-width: 1400px) { .container { max-width: 1320px; } }
+
+.container-fluid {
+  width: 100%;
+  padding-right: var(--bs-spacing-3);
+  padding-left: var(--bs-spacing-3);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Text Alignment */
+.text-start { text-align: left !important; }
+.text-end { text-align: right !important; }
+.text-center { text-align: center !important; }
+@media (min-width: 576px) { .text-sm-start { text-align: left !important; } .text-sm-end { text-align: right !important; } .text-sm-center { text-align: center !important; } }
+@media (min-width: 768px) { .text-md-start { text-align: left !important; } .text-md-end { text-align: right !important; } .text-md-center { text-align: center !important; } }
+@media (min-width: 992px) { .text-lg-start { text-align: left !important; } .text-lg-end { text-align: right !important; } .text-lg-center { text-align: center !important; } }
+@media (min-width: 1200px) { .text-xl-start { text-align: left !important; } .text-xl-end { text-align: right !important; } .text-xl-center { text-align: center !important; } }
+@media (min-width: 1400px) { .text-xxl-start { text-align: left !important; } .text-xxl-end { text-align: right !important; } .text-xxl-center { text-align: center !important; } }
+
+/* Margins and Paddings (Bootstrap-like m-X, p-X) - Asegúrate de que estén todas */
+.mb-0 { margin-bottom: var(--bs-spacing-0) !important; }
+.mb-1 { margin-bottom: var(--bs-spacing-1) !important; }
+.mb-2 { margin-bottom: var(--bs-spacing-2) !important; }
+.mb-3 { margin-bottom: var(--bs-spacing-3) !important; }
+.mb-4 { margin-bottom: var(--bs-spacing-4) !important; }
+.mb-5 { margin-bottom: var(--bs-spacing-5) !important; }
+
+.mt-0 { margin-top: var(--bs-spacing-0) !important; }
+.mt-1 { margin-top: var(--bs-spacing-1) !important; }
+.mt-2 { margin-top: var(--bs-spacing-2) !important; }
+.mt-3 { margin-top: var(--bs-spacing-3) !important; }
+.mt-4 { margin-top: var(--bs-spacing-4) !important; }
+.mt-5 { margin-top: var(--bs-spacing-5) !important; }
+
+.py-0 { padding-top: var(--bs-spacing-0) !important; padding-bottom: var(--bs-spacing-0) !important; }
+.py-1 { padding-top: var(--bs-spacing-1) !important; padding-bottom: var(--bs-spacing-1) !important; }
+.py-2 { padding-top: var(--bs-spacing-2) !important; padding-bottom: var(--bs-spacing-2) !important; }
+.py-3 { padding-top: var(--bs-spacing-3) !important; padding-bottom: var(--bs-spacing-3) !important; }
+.py-4 { padding-top: var(--bs-spacing-4) !important; padding-bottom: var(--bs-spacing-4) !important; }
+.py-5 { padding-top: var(--bs-spacing-5) !important; padding-bottom: var(--bs-spacing-5) !important; } /* ¡Este es importante para el py-5 de tus secciones! */
+
+.px-0 { padding-left: var(--bs-spacing-0) !important; padding-right: var(--bs-spacing-0) !important; }
+.px-1 { padding-left: var(--bs-spacing-1) !important; padding-right: var(--bs-spacing-1) !important; }
+.px-2 { padding-left: var(--bs-spacing-2) !important; padding-right: var(--bs-spacing-2) !important; }
+.px-3 { padding-left: var(--bs-spacing-3) !important; padding-right: var(--bs-spacing-3) !important; }
+.px-4 { padding-left: var(--bs-spacing-4) !important; padding-right: var(--bs-spacing-4) !important; }
+.px-5 { padding-left: var(--bs-spacing-5) !important; padding-right: var(--bs-spacing-5) !important; }
+
+.me-0 { margin-right: var(--bs-spacing-0) !important; }
+.me-1 { margin-right: var(--bs-spacing-1) !important; }
+.me-2 { margin-right: var(--bs-spacing-2) !important; }
+.me-3 { margin-right: var(--bs-spacing-3) !important; }
+.me-4 { margin-right: var(--bs-spacing-4) !important; }
+.me-5 { margin-right: var(--bs-spacing-5) !important; }
+.ms-auto { margin-left: auto !important; }
+
+/* Display Utilities */
+.d-none { display: none !important; }
+.d-inline { display: inline !important; }
+.d-inline-block { display: inline-block !important; }
+.d-block { display: block !important; }
+.d-grid { display: grid !important; }
+.d-flex { display: flex !important; }
+.d-inline-flex { display: inline-flex !important; }
+
+@media (min-width: 576px) { .d-sm-none { display: none !important; } .d-sm-block { display: block !important; } .d-sm-flex { display: flex !important; } }
+@media (min-width: 768px) { .d-md-none { display: none !important; } .d-md-block { display: block !important; } .d-md-flex { display: flex !important; } .d-md-grid { display: grid !important; } }
+@media (min-width: 992px) { .d-lg-none { display: none !important; } .d-lg-block { display: block !important; } .d-lg-flex { display: flex !important; } }
+@media (min-width: 1200px) { .d-xl-none { display: none !important; } .d-xl-block { display: block !important; } .d-xl-flex { display: flex !important; } }
+
+/* Flex Utilities */
+.flex-row { flex-direction: row !important; }
+.flex-column { flex-direction: column !important; }
+.justify-content-start { justify-content: flex-start !important; }
+.justify-content-end { justify-content: flex-end !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-between { justify-content: space-between !important; }
+.align-items-start { align-items: flex-start !important; }
+.align-items-end { align-items: flex-end !important; }
+.align-items-center { align-items: center !important; }
+.align-self-start { align-self: flex-start !important; }
+.align-self-end { align-self: center !important; }
+.align-self-center { align-self: center !important; }
+.flex-grow-1 { flex-grow: 1 !important; }
+
+@media (min-width: 768px) { .flex-md-row { flex-direction: row !important; } .flex-md-column { flex-direction: column !important; } }
+@media (min-width: 992px) { .flex-lg-row { flex-direction: row !important; } .flex-lg-column { flex-direction: column !important; } }
+
+
+/* --- Grid (Row and Column) Utilities - AJUSTADO Y COMPLETO --- */
+.row {
+  --bs-gutter-x: 1.5rem; /* Espacio horizontal entre columnas */
+  --bs-gutter-y: 1.5rem; /* Espacio vertical entre filas */
+
+  display: flex;
+  flex-wrap: wrap; /* Esencial para que las columnas salten de línea */
+
+  /* Compensación para el gutter (márgenes negativos) */
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x) * -.5);
+  margin-left: calc(var(--bs-gutter-x) * -.5);
+}
+
+.row > * { /* Aplica a los hijos directos de .row (tus .col-X) */
+  flex-shrink: 0;
+  width: 100%; /* Por defecto, 100% en móvil */
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) * .5);
+  padding-left: calc(var(--bs-gutter-x) * .5);
+  margin-top: var(--bs-gutter-y); /* Margen superior para el gutter vertical */
+}
+
+/* Gutters (g-X) */
+.g-0 { --bs-gutter-x: 0; --bs-gutter-y: 0; }
+.g-1 { --bs-gutter-x: var(--bs-spacing-1); --bs-gutter-y: var(--bs-spacing-1); }
+.g-2 { --bs-gutter-x: var(--bs-spacing-2); --bs-gutter-y: var(--bs-spacing-2); }
+.g-3 { --bs-gutter-x: var(--bs-spacing-3); --bs-gutter-y: var(--bs-spacing-3); }
+.g-4 { --bs-gutter-x: var(--bs-spacing-4); --bs-gutter-y: var(--bs-spacing-4); } /* ¡Este es el que usas! */
+.g-5 { --bs-gutter-x: var(--bs-spacing-5); --bs-gutter-y: var(--bs-spacing-5); }
+
+
+/* Columns (Asegúrate de que todos los breakpoints necesarios estén aquí) */
+/* Mobile First: Por defecto, todas las columnas son 100% (col-12) */
+.col-12 { flex: 0 0 auto; width: 100%; }
+.col-auto { flex: 0 0 auto; width: auto; }
+
+/* Small devices (sm, 576px and up) */
+@media (min-width: 576px) {
+  .col-sm-6 { flex: 0 0 auto; width: 50%; } /* Ejemplo si necesitas 2 columnas en sm */
+}
+
+/* Medium devices (md, 768px and up) */
+@media (min-width: 768px) {
+  .col-md-auto { flex: 0 0 auto; width: auto; }
+  .col-md-1 { flex: 0 0 auto; width: 8.33333333%; }
+  .col-md-2 { flex: 0 0 auto; width: 16.66666667%; }
+  .col-md-3 { flex: 0 0 auto; width: 25%; }
+  .col-md-4 { flex: 0 0 auto; width: 33.33333333%; } /* Para 3 columnas en MD */
+  .col-md-5 { flex: 0 0 auto; width: 41.66666667%; }
+  .col-md-6 { flex: 0 0 auto; width: 50%; } /* ¡Para 2 columnas en tablets! */
+  .col-md-7 { flex: 0 0 auto; width: 58.33333333%; }
+  .col-md-8 { flex: 0 0 auto; width: 66.66666667%; }
+  .col-md-9 { flex: 0 0 auto; width: 75%; }
+  .col-md-10 { flex: 0 0 auto; width: 83.33333333%; }
+  .col-md-11 { flex: 0 0 auto; width: 91.66666667%; }
+  .col-md-12 { flex: 0 0 auto; width: 100%; }
+}
+
+/* Large devices (lg, 992px and up) */
+@media (min-width: 992px) {
+  .col-lg-auto { flex: 0 0 auto; width: auto; }
+  .col-lg-1 { flex: 0 0 auto; width: 8.33333333%; }
+  .col-lg-2 { flex: 0 0 auto; width: 16.66666667%; }
+  .col-lg-3 { flex: 0 0 auto; width: 25%; }
+  .col-lg-4 { flex: 0 0 auto; width: 33.33333333%; } /* ¡Para 3 columnas en desktop! */
+  .col-lg-5 { flex: 0 0 auto; width: 41.66666667%; }
+  .col-lg-6 { flex: 0 0 auto; width: 50%; }
+  .col-lg-7 { flex: 0 0 auto; width: 58.33333333%; }
+  .col-lg-8 { flex: 0 0 auto; width: 66.66666667%; }
+  .col-lg-9 { flex: 0 0 auto; width: 75%; }
+  .col-lg-10 { flex: 0 0 auto; width: 83.33333333%; }
+  .col-lg-11 { flex: 0 0 auto; width: 91.66666667%; }
+  .col-lg-12 { flex: 0 0 auto; width: 100%; }
+}
+
+/* Colors (text-X, bg-X) */
+.text-primary { color: var(--primary-blue) !important; }
+.text-secondary { color: var(--secondary-blue) !important; }
+.text-dark { color: var(--text-dark) !important; }
+.text-medium { color: var(--text-medium) !important; }
+.text-light { color: var(--text-light) !important; }
+
+.bg-primary { background-color: var(--primary-blue) !important; }
+.bg-light-blue { background-color: var(--light-blue-bg) !important; }
+.bg-white { background-color: #fff !important; }
+
+
+/* Font Weights */
+.fw-light { font-weight: var(--fw-light) !important; }
+.fw-normal { font-weight: var(--fw-normal) !important; }
+.fw-medium { font-weight: var(--fw-medium) !important; }
+.fw-semibold { font-weight: var(--fw-semibold) !important; }
+.fw-bold { font-weight: var(--fw-bold) !important; }
+
+
+/* Text Lead (larger paragraph) */
+.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+/* Section Title (similar to h2 or display-5 for sections) */
+.section-title {
+  font-size: 2.5rem; /* display-4 o display-5 */
+  font-weight: var(--fw-bold); /* fw-bold */
+  color: var(--primary-blue);
+  text-align: center; /* Asegura que siempre esté centrado */
+  margin-top: 0; /* Asegurar que no hay margen superior extra */
+  margin-bottom: var(--bs-spacing-5); /* Espacio generoso debajo del título (48px) */
+}
+
+/* Highlights */
+.highlight {
+  color: var(--secondary-blue);
+}
+
+/* Card Component (Simplified from Bootstrap Card) */
+.card {
+  position: relative; /* Esencial para posicionar el pseudo-elemento */
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  word-wrap: break-word;
+  background-color: var(--bg-white); /* Fondo blanco que quieres */
+  background-clip: padding-box; /* Asegura que el fondo no cubra el borde del pseudo-elemento */
+  border: 1px solid transparent; /* Establece un borde transparente por defecto */
+  border-radius: 0.25rem;
+  box-shadow: 0 0.125rem 0.25rem var(--shadow-light); /* Sombra suave */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  z-index: 1; /* Asegura que la tarjeta esté por encima del pseudo-elemento */
+}
+
+/* El pseudo-elemento para el borde degradado */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit; /* Hereda el border-radius de la tarjeta */
+  padding: 2px; /* Grosor del borde degradado */
+  background: linear-gradient(45deg, var(--primary-blue), var(--secondary-blue)); /* Tu degradado */
+  -webkit-mask:
+     linear-gradient(#fff 0 0) content-box,
+     linear-gradient(#fff 0 0);
+  mask:
+     linear-gradient(#fff 0 0) content-box,
+     linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude; /* Excluye el contenido para que solo se vea el borde */
+  z-index: -1; /* Coloca el pseudo-elemento detrás de la tarjeta */
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem var(--shadow-medium);
+}
+
+
+
+/* --- App Root and Main Content Adjustments --- */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .main-content {
-  padding: 20px;
-  min-height: calc(100vh - 120px); /* Asumiendo 64px para toolbar y 56px para footer */
+  flex-grow: 1;
+  padding-top: 64px; /* Ajusta si tu navbar fijo tiene otra altura */
+  min-height: calc(100vh - 64px - 56px); /* 64px para header, ~56px para footer */
 }
 
-/* Estilos para el footer (será modificado más adelante con columnas) */
-.app-footer {
-  background-color: var(--primary-blue); /* Footer con el color primario */
-  color: var(--text-light);
-  padding: 40px 0; /* Más padding para el footer con columnas */
-  font-size: 0.9em;
+/* --- Scrollbar Styling (Optional) --- */
+::-webkit-scrollbar {
+  width: 8px;
 }
-
+::-webkit-scrollbar-track {
+  background: var(--light-blue-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-blue);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-blue);
+}

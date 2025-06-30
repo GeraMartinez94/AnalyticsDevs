@@ -1,15 +1,21 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button'; // Para el botón "Conoce más"
-import { MatCardModule } from '@angular/material/card'; 
+import { CommonModule } from '@angular/common'; // Si usas directivas comunes
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-inicio',
    standalone: true, // ¡ESTO ES CLAVE para standalone! 
-  imports: [CommonModule, MatButtonModule, // Añade MatButtonModule para usar mat-button
-    MatCardModule],
+  imports: [CommonModule,
+    RouterLink,
+    MatButtonModule, // <-- ¡Importar!
+    MatIconModule   ],
   templateUrl: './inicio.html',
   styleUrl: './inicio.css'
 })
 export class InicioComponent {
+ constructor() { }
 
+  ngOnInit(): void {
+  }
 }

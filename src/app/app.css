@@ -1,126 +1,243 @@
-/* app.component.scss */
+/* src/app/app.css */
 
-/* Variables de color (Asegúrate que estas estén en src/styles.scss o src/custom-theme.scss) */
-/* Si estas variables no están en un archivo accesible globalmente, Bootstrap usará sus colores por defecto */
-
-
-/* Sobreescribir Estilos de Bootstrap */
-.navbar.bg-primary {
-  background-color: var(--primary-blue) !important;
+/* Variables CSS (si las tienes en styles.css, no las repitas aquí) */
+:root {
+  --primary-blue: #1976d2; /* Azul Material Primary */
+  --secondary-blue: #2196f3; /* Azul Material Light */
+  --text-light: #ffffff;
+  --text-dark: #333333;
 }
 
-.btn-primary {
-  background-color: var(--secondary-blue) !important;
-  border-color: var(--secondary-blue) !important;
-  color: var(--text-light) !important;
-}
-
-.btn-primary:hover {
-  background-color: darken(var(--secondary-blue), 10%) !important;
-  border-color: darken(var(--secondary-blue), 10%) !important;
-}
-
-.bg-dark {
-     background-color: var(--primary-blue) !important;
-}
-
-
-/* Estilos Específicos para Componentes de app.component.html */
-.app-logo {
-  height: 40px;
-  width: auto;
-}
-
-.navbar-brand {
-    color: var(--text-light) !important;
-    font-weight: bold;
-}
-
-.navbar-nav .nav-link {
+/* Estilos para la Toolbar (Navbar) */
+.app-toolbar {
+  background-color: var(--primary-blue);
   color: var(--text-light);
-  transition: color 0.3s ease-in-out;
+  padding: 0 20px;
+  height: 64px; /* Altura estándar de la toolbar */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
 }
 
-.navbar-nav .nav-link:hover {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.navbar-nav .nav-link.active {
+.toolbar-brand {
+  font-size: 1.5em;
   font-weight: bold;
-  border-bottom: 2px solid var(--text-light);
-  padding-bottom: 5px;
 }
 
-.navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.5);
+.spacer {
+  flex: 1; /* Empuja los elementos a los extremos */
 }
 
-
-.main-content {
-  padding: 20px 0;
-  min-height: calc(100vh - 200px);
-}
-
-
-
-/* Estilos para el Footer */
-.app-footer {
-  font-size: 0.9em;
-}
-
-.footer-logo {
-  font-size: 1.8em;
-  font-weight: bold;
+.desktop-nav button {
   color: var(--text-light);
+  margin: 0 10px;
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: 500;
 }
 
-.app-footer h4 {
-  font-size: 1.1em;
-  font-weight: bold;
+/* Menú Móvil */
+.mobile-menu-button {
+  display: none; /* Oculto por defecto en desktop */
+}
+
+.mobile-nav {
+  display: none; /* Oculto por defecto */
+  flex-direction: column;
+  background-color: var(--primary-blue);
+  position: absolute;
+  top: 64px; /* Debajo de la toolbar */
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
+
+.mobile-nav.open {
+  display: flex; /* Muestra cuando la clase 'open' está presente */
+}
+
+.mobile-nav button {
+  width: 100%;
+  text-align: left;
+  padding: 15px 20px;
   color: var(--text-light);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobile-nav button:last-child {
+  border-bottom: none;
+}
+
+/* --- Estilos para el Contenedor Principal (main-content) --- */
+.app-main-content {
+  padding: 20px 0; /* Padding arriba y abajo */
+  /* Ajusta el min-height según la altura de tu toolbar y footer */
+  min-height: calc(100vh - 64px - 120px); /* Ejemplo: 100vh - (altura toolbar) - (altura footer) */
+  overflow-x: hidden; /* ¡Importante! Previene la barra de scroll horizontal durante las animaciones */
+  position: relative; /* Asegura que si usas posición absoluta dentro, sea respecto a este contenedor */
+}
+
+/* --- Estilos para el Contenedor del Router Outlet (CRUCIAL para las animaciones) --- */
+
+
+.toolbar-centered { /* La clase del contenedor padre */
+  display: flex;
+  justify-content: center; /* ¡Esto centrará el logo Y la navegación! */
+  align-items: center; /* Centra verticalmente también */
+}
+
+/* --- Estilos para la Sección de Llamada a la Acción Global --- */
+.global-call-to-action {
+  background-color: var(--secondary-blue);
+  color: var(--text-light);
+  padding: 60px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.global-call-to-action h2 {
+  font-size: 2.5em;
+  font-weight: 700;
   margin-bottom: 15px;
 }
 
-.app-footer .list-unstyled li a {
-  color: rgba(255, 255, 255, 0.7);
+.global-call-to-action p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.global-call-to-action button {
+  padding: 12px 30px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  background-color: #ff4081; /* Usando el accent de indigo-pink */
+  color: white;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
+}
+
+.global-call-to-action button:hover {
+  background-color: #ff6e9a;
+  transform: translateY(-2px);
+}
+
+
+/* --- Estilos para el Footer --- */
+.app-footer {
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  padding: 40px 0;
+  font-size: 0.9em;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-col h3.footer-logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-light);
+}
+
+.footer-col h4 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-light);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 5px;
+}
+
+.footer-col p,
+.footer-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+  color: var(--text-light);
   text-decoration: none;
   transition: color 0.3s ease-in-out;
 }
 
-.app-footer .list-unstyled li a:hover {
+.footer-col ul li a:hover {
   color: var(--secondary-blue);
 }
 
-.social-media-icon {
+.social-links {
+  display: flex; /* Para que los iconos estén en línea */
+  gap: 10px; /* Espacio entre iconos */
+}
+
+.social-media-icon { /* Estilos para los iconos de Material SVG */
   width: 30px;
   height: 30px;
-  border-radius: 4px;
-  opacity: 0.9;
-  transition: opacity 0.3s ease-in-out, transform 0.2s ease-out;
+  object-fit: contain;
+  vertical-align: middle;
+  color: var(--text-light); /* Color de los iconos */
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .social-media-icon:hover {
   opacity: 1;
-  transform: translateY(-2px);
+  color: var(--secondary-blue); /* Cambia de color al pasar el ratón */
 }
 
 .footer-bottom-text {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 20px;
-    margin-top: 20px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-
-/* Media Queries */
-@media (max-width: 767.98px) {
-  .app-footer .footer-col {
-      text-align: center;
-      margin-bottom: 20px;
+/* --- Responsive para Navbar y Footer --- */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none; /* Oculta la navegación de escritorio */
   }
 
-  .app-footer .social-links {
-    justify-content: center;
+  .mobile-menu-button {
+    display: block; /* Muestra el botón de menú móvil */
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    text-align: center;
+  }
+  .footer-col h4 {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .social-links {
+    justify-content: center; /* Centra los iconos en móvil */
+    margin-top: 15px;
+  }
+
+  .global-call-to-action h2 {
+    font-size: 2em;
+  }
+  .global-call-to-action p {
+    font-size: 1em;
   }
 }
