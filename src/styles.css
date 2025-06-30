@@ -2,7 +2,6 @@
    Mantendremos 'indigo-pink' porque es el que tenías y su estructura base funciona.
    Los colores personalizados los manejaremos con CSS directamente.
 */
-@import '@angular/material/prebuilt-themes/indigo-pink.css';
 
 /* --- Variables de Color Personalizadas (CSS Variables) --- */
 /* Esto facilita el cambio de colores en el futuro y mantiene consistencia */
