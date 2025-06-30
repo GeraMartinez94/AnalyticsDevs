@@ -1,0 +1,155 @@
+/* Toolbar ya está en styles.css global, aquí si quieres sobrescribir algo o añadir más específicos */
+/* app-toolbar, toolbar-brand, spacer, main-content ya deberían estar en styles.css */
+
+.main-content {
+  padding: 20px 0; /* Padding arriba y abajo, los lados los maneja content-container */
+  min-height: calc(100vh - 120px);
+}
+
+/* --- Estilos para la Sección de Llamada a la Acción Global --- */
+.global-call-to-action {
+  background-color: var(--secondary-blue); /* Un azul ligeramente diferente para destacar */
+  color: var(--text-light);
+  padding: 60px 0;
+  text-align: center;
+  margin-top: 40px; /* Espacio antes del footer */
+}
+
+.global-call-to-action h2 {
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.global-call-to-action p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.global-call-to-action button {
+  padding: 12px 30px;
+  font-size: 1.1em;
+  border-radius: 5px; /* Bordes ligeramente redondeados */
+  background-color: #ff4081; /* Usando el accent de indigo-pink para el botón si no sobrescribe */
+  color: white;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
+}
+
+.global-call-to-action button:hover {
+  background-color: #ff6e9a; /* Un tono un poco más claro al pasar el mouse */
+  transform: translateY(-2px);
+}
+
+
+/* --- Estilos para el Footer --- */
+.app-footer {
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  padding: 40px 0;
+  font-size: 0.9em;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 4 columnas responsivas */
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-col h3.footer-logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-light);
+}
+
+.footer-col h4 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-light);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Línea divisoria sutil */
+  padding-bottom: 5px;
+}
+
+.footer-col p,
+.footer-col ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
+}
+
+.footer-col ul li a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-col ul li a:hover {
+  color: var(--secondary-blue); /* Cambia a azul claro al hacer hover */
+}
+
+.social-links img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 4px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.social-links img:hover {
+  opacity: 1;
+}
+
+.footer-bottom-text {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Responsive para Footer */
+@media (max-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+    text-align: center;
+  }
+  .footer-col h4 {
+    border-bottom: none; /* Quita la línea divisoria en móvil si se ve mal */
+    padding-bottom: 0;
+  }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+  }
+ .social-media-icon {
+  width: 30px;  /* Ajusta el ancho de tus iconos */
+  height: 30px; /* Ajusta la altura de tus iconos */
+  object-fit: contain; /* Asegura que la imagen se ajuste bien sin deformarse */
+
+}
+
+  .global-call-to-action h2 {
+    font-size: 2em;
+  }
+  .global-call-to-action p {
+    font-size: 1em;
+  }
+  
+}
