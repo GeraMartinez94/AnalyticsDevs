@@ -1,155 +1,126 @@
-/* Toolbar ya está en styles.css global, aquí si quieres sobrescribir algo o añadir más específicos */
-/* app-toolbar, toolbar-brand, spacer, main-content ya deberían estar en styles.css */
+/* app.component.scss */
 
-.main-content {
-  padding: 20px 0; /* Padding arriba y abajo, los lados los maneja content-container */
-  min-height: calc(100vh - 120px);
+/* Variables de color (Asegúrate que estas estén en src/styles.scss o src/custom-theme.scss) */
+/* Si estas variables no están en un archivo accesible globalmente, Bootstrap usará sus colores por defecto */
+
+
+/* Sobreescribir Estilos de Bootstrap */
+.navbar.bg-primary {
+  background-color: var(--primary-blue) !important;
 }
 
-/* --- Estilos para la Sección de Llamada a la Acción Global --- */
-.global-call-to-action {
-  background-color: var(--secondary-blue); /* Un azul ligeramente diferente para destacar */
+.btn-primary {
+  background-color: var(--secondary-blue) !important;
+  border-color: var(--secondary-blue) !important;
+  color: var(--text-light) !important;
+}
+
+.btn-primary:hover {
+  background-color: darken(var(--secondary-blue), 10%) !important;
+  border-color: darken(var(--secondary-blue), 10%) !important;
+}
+
+.bg-dark {
+     background-color: var(--primary-blue) !important;
+}
+
+
+/* Estilos Específicos para Componentes de app.component.html */
+.app-logo {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-brand {
+    color: var(--text-light) !important;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-link {
   color: var(--text-light);
-  padding: 60px 0;
-  text-align: center;
-  margin-top: 40px; /* Espacio antes del footer */
+  transition: color 0.3s ease-in-out;
 }
 
-.global-call-to-action h2 {
-  font-size: 2.5em;
-  font-weight: 700;
-  margin-bottom: 15px;
+.navbar-nav .nav-link:hover {
+  color: rgba(255, 255, 255, 0.75);
 }
 
-.global-call-to-action p {
-  font-size: 1.2em;
-  margin-bottom: 30px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.global-call-to-action button {
-  padding: 12px 30px;
-  font-size: 1.1em;
-  border-radius: 5px; /* Bordes ligeramente redondeados */
-  background-color: #ff4081; /* Usando el accent de indigo-pink para el botón si no sobrescribe */
-  color: white;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
-}
-
-.global-call-to-action button:hover {
-  background-color: #ff6e9a; /* Un tono un poco más claro al pasar el mouse */
-  transform: translateY(-2px);
-}
-
-
-/* --- Estilos para el Footer --- */
-.app-footer {
-  background-color: var(--primary-blue);
-  color: var(--text-light);
-  padding: 40px 0;
-  font-size: 0.9em;
-}
-
-.footer-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 4 columnas responsivas */
-  gap: 30px;
-  margin-bottom: 30px;
-}
-
-.footer-col h3.footer-logo {
-  font-size: 1.8em;
+.navbar-nav .nav-link.active {
   font-weight: bold;
-  margin-bottom: 15px;
-  color: var(--text-light);
-}
-
-.footer-col h4 {
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: var(--text-light);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Línea divisoria sutil */
+  border-bottom: 2px solid var(--text-light);
   padding-bottom: 5px;
 }
 
-.footer-col p,
-.footer-col ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
-.footer-col ul li {
-  margin-bottom: 8px;
+
+.main-content {
+  padding: 20px 0;
+  min-height: calc(100vh - 200px);
 }
 
-.footer-col ul li a {
+
+
+/* Estilos para el Footer */
+.app-footer {
+  font-size: 0.9em;
+}
+
+.footer-logo {
+  font-size: 1.8em;
+  font-weight: bold;
   color: var(--text-light);
+}
+
+.app-footer h4 {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: var(--text-light);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.app-footer .list-unstyled li a {
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   transition: color 0.3s ease-in-out;
 }
 
-.footer-col ul li a:hover {
-  color: var(--secondary-blue); /* Cambia a azul claro al hacer hover */
+.app-footer .list-unstyled li a:hover {
+  color: var(--secondary-blue);
 }
 
-.social-links img {
+.social-media-icon {
   width: 30px;
   height: 30px;
-  margin-right: 10px;
   border-radius: 4px;
-  opacity: 0.8;
-  transition: opacity 0.3s ease-in-out;
+  opacity: 0.9;
+  transition: opacity 0.3s ease-in-out, transform 0.2s ease-out;
 }
 
-.social-links img:hover {
+.social-media-icon:hover {
   opacity: 1;
+  transform: translateY(-2px);
 }
 
 .footer-bottom-text {
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 20px;
-  margin-top: 20px;
-  color: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    margin-top: 20px;
 }
 
-/* Responsive para Footer */
-@media (max-width: 768px) {
-  .footer-grid {
-    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
-    text-align: center;
+
+/* Media Queries */
+@media (max-width: 767.98px) {
+  .app-footer .footer-col {
+      text-align: center;
+      margin-bottom: 20px;
   }
-  .footer-col h4 {
-    border-bottom: none; /* Quita la línea divisoria en móvil si se ve mal */
-    padding-bottom: 0;
-  }
-  .social-links {
-    display: flex;
+
+  .app-footer .social-links {
     justify-content: center;
-    margin-top: 15px;
   }
- .social-media-icon {
-  width: 30px;  /* Ajusta el ancho de tus iconos */
-  height: 30px; /* Ajusta la altura de tus iconos */
-  object-fit: contain; /* Asegura que la imagen se ajuste bien sin deformarse */
-
-}
-
-  .global-call-to-action h2 {
-    font-size: 2em;
-  }
-  .global-call-to-action p {
-    font-size: 1em;
-  }
-  
 }

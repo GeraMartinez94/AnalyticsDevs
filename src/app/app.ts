@@ -1,12 +1,12 @@
 // src/app/app.component.ts
 import { CommonModule } from '@angular/common'; // Necesario para directivas como *ngIf, *ngFor
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router'; // RouterLink para el nav, RouterOutlet para el contenido de la ruta
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router'; // RouterLink para el nav, RouterOutlet para el contenido de la ruta
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-
+declare const bootstrap: any;
 // Importa los módulos de animación, ahora que `@angular/animations` está instalado
 import {
   trigger,
@@ -17,6 +17,7 @@ import {
   group,
   animateChild // animateChild es útil para animaciones anidadas, aunque no se use directamente en este ejemplo
 } from '@angular/animations';
+import { filter } from 'rxjs';
 
 
 @Component({
@@ -67,9 +68,8 @@ import {
 export class App implements OnInit { // Asegúrate de implementar OnInit si usas ngOnInit
   protected title = 'mi-emprendimiento';
   isMobileMenuOpen = false;
-  currentYear!: number; // O puedes inicializarlo aquí: currentYear: number = new Date().getFullYear();
-
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
+  currentYear: number = new Date().getFullYear();
+  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer, private router: Router) {
     this.matIconRegistry.addSvgIcon(
       'linkedin',
       this.domSanitizer.bypassSecurityTrustResourceUrl('./public/linkedin.svg')
@@ -83,8 +83,17 @@ export class App implements OnInit { // Asegúrate de implementar OnInit si usas
       'twitter',
       this.domSanitizer.bypassSecurityTrustResourceUrl('./public/twitter.svg')
     );
+      this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.closeNavbar();
+    });
   }
-
+ ngAfterViewInit() {
+    // Para asegurarnos de que Bootstrap esté cargado cuando intentemos inicializar
+    // cualquier componente de Bootstrap si lo necesitaramos, aunque en este caso
+    // el navbar se inicializa automáticamente si el JS está en angular.json.
+  }
   ngOnInit() {
     this.currentYear = new Date().getFullYear();
   }
@@ -100,5 +109,22 @@ export class App implements OnInit { // Asegúrate de implementar OnInit si usas
   // Función necesaria para pasar el 'data.animation' al trigger en el HTML
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+  closeNavbar() {
+    // Obtener el elemento del botón que abre/cierra el navbar
+    const navbarToggler = document.getElementById('navbarToggler');
+    // Obtener el elemento del collapse
+    const navbarCollapse = document.getElementById('navbarNav');
+
+    // Comprobar si el navbar está abierto (clase 'show' presente) y si estamos en una vista móvil
+    // La clase 'collapsing' indica que está en proceso de abrirse o cerrarse.
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+      // Usar la API de JavaScript de Bootstrap para colapsar el menú
+      // Esta es la forma más robusta y recomendada.
+      const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse) || new bootstrap.Collapse(navbarCollapse, { toggle: false });
+      if (bsCollapse) {
+        bsCollapse.hide();
+      }
+    }
   }
 }

@@ -1,154 +1,79 @@
+/* src/app/pages/home/home.component.scss */
+
+/* --- Hero Section --- */
 .home-hero-section {
-  position: relative;
-  height: 500px; /* Altura de la sección hero */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--text-light); /* Texto blanco para que contraste con el fondo */
-  background: url('https://via.placeholder.com/1920x500?text=Background+Video+or+Image') no-repeat center center/cover;
-  /* Reemplaza 'https://via.placeholder.com/1920x500?text=Background+Video+or+Image' con tu propia imagen o video */
+  background: url('/assets/img/hero-bg.jpg') no-repeat center center/cover; /* Asegúrate de la ruta de tu imagen de fondo */
+  min-height: 500px; /* Altura mínima para el hero */
+  position: relative; /* Para el overlay */
+  overflow: hidden; /* Asegura que el pseudo-elemento no se desborde */
+  padding: 80px 0; /* Padding general para el contenido del hero */
 }
 
-.hero-background-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Overlay oscuro para que el texto se lea bien */
-  z-index: 1;
+/* Overlay para la imagen de fondo del Hero */
+.home-hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Oscurece la imagen de fondo */
+    z-index: 0; /* Asegura que esté detrás del contenido */
 }
 
 .hero-content {
-  position: relative;
-  z-index: 2; /* Asegura que el contenido esté sobre el overlay */
+  position: relative; /* Para que el contenido esté sobre el overlay */
+  z-index: 1;
+  max-width: 900px; /* Limita el ancho del texto en pantallas grandes */
+  margin: 0 auto; /* Centra el contenido si se limita el max-width */
 }
 
 .hero-title {
-  font-size: 3.8em; /* Más grande */
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: var(--text-light); /* Color de texto blanco */
-}
-
-.hero-title .highlight {
-  color: var(--secondary-blue); /* Color de acento para la palabra clave */
+  color: var(--text-light); /* Tu color para el título del hero */
+  /* Bootstrap ya maneja display-4 y fw-bold */
 }
 
 .hero-subtitle {
-  font-size: 1.5em;
-  max-width: 900px;
-  margin: 0 auto 40px;
-  color: rgba(255, 255, 255, 0.9); /* Texto ligeramente más suave */
+  color: rgba(255, 255, 255, 0.9); /* Un poco más transparente que el título */
+  /* Bootstrap ya maneja lead */
 }
 
-.home-hero-section button {
-  padding: 15px 40px;
-  font-size: 1.2em;
-  border-radius: 5px;
-  background-color: #ff4081; /* Usando el accent de indigo-pink para el botón */
-  color: white;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
+.highlight {
+  color: var(--secondary-blue); /* Color de acento para la palabra resaltada */
 }
 
-.home-hero-section button:hover {
-  background-color: #ff6e9a;
-  transform: translateY(-3px);
-}
-
-/* --- Estilos para la sección de Características/Pilares (mantener) --- */
-.home-features-section {
-  padding: 60px 0;
-  background-color: #f5f5f5;
-}
-
+/* --- Sección de Pilares (Features Section) --- */
 .section-title {
-  font-size: 2.8em;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 50px;
-  color: var(--primary-blue);
-}
-
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-.feature-item {
-  text-align: center;
-  padding: 20px;
-  box-shadow: 0 2px 5px var(--shadow-light);
-  border-radius: 8px; /* Bordes redondeados */
-  transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
-}
-.feature-item mat-card-header {
-  /* Centra el contenido del header (incluyendo el título) */
-  display: flex;
-  flex-direction: column; /* Asegura que el título ocupe su propia línea si hay otros elementos */
-  align-items: center; /* Centra horizontalmente el contenido del header */
-  text-align: center; /* Una capa extra de seguridad para el texto dentro */
-  padding-bottom: 0; /* Ajusta el padding si el título se ve muy pegado al borde superior */
-}
-.feature-item:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 8px 20px var(--shadow-medium);
-}
-
-.mat-card-title {
-  font-size: 1.6em;
+  color: var(--text-dark); /* Color de tu título de sección */
+  font-size: 2.5em; /* Ajusta el tamaño de fuente si es necesario */
   font-weight: bold;
-  margin-bottom: 10px;
-  color: var(--primary-blue);
+  margin-bottom: 40px; /* Más espacio debajo del título */
 }
 
-.mat-card-content p {
-  font-size: 1em;
-  color: var(--text-medium);
-  line-height: 1.5;
+.card {
+  border: none;
+  border-radius: 8px;
+  box-shadow: var(--shadow-medium); /* Usa tu variable de sombra */
+  transition: transform 0.3s ease-in-out;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .home-hero-section {
-    height: 400px;
-  }
-  .hero-title {
-  font-size: 4.8em;
-  color: var(--primary-blue);
-  font-weight: 800; /* Asegúrate de que este peso coincida con uno de los que importaste */
-  text-align: center;
-
-  /* CAMBIO CLAVE: Aplicar la nueva fuente */
-  font-family: 'Oswald', sans-serif; /* 'Oswald' es el nombre de la fuente; 'sans-serif' es la fuente de respaldo */
-
-  line-height: 1.1;
-  margin-bottom: 20px;
-  letter-spacing: -0.02em;
-  word-spacing: 0.05em;
-  }
-  .hero-subtitle {
-  line-height: 1.6; /* Aumenta el espacio entre líneas de texto. Valores comunes: 1.5 a 1.8 */
-  margin-top: 20px; /* Espacio superior para separarlo del título */
-  margin-bottom: 40px; /* Espacio inferior para separarlo del botón o siguiente sección */
-  letter-spacing: 0.02em; /* Ligeramente aumenta el espacio entre caracteres para legibilidad */
-  padding: 0 5%; /* Añade un padding horizontal para que el texto no toque los bordes en pantallas más pequeñas */
-
-  /* Opcional: Ancho máximo para mejor legibilidad en pantallas muy anchas */
-  max-width: 700px; /* Limita el ancho del párrafo para que las líneas no sean demasiado largas */
-  margin-left: auto; /* Centra el párrafo si usas max-width */
-  margin-right: auto; /* Centra el párrafo si usas max-width */
-
-  /* Asegura que el texto esté centrado si la sección lo permite */
-  text-align: center; 
-  }
-  .section-title {
-    font-size: 2em;
-  }
-  .home-hero-section button {
-    font-size: 1em;
-    padding: 10px 25px;
-  }
+.card:hover {
+  transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
 }
+
+.card-body {
+  padding: 30px; /* Relleno dentro de la tarjeta */
+}
+
+.card-title {
+  color: var(--primary-blue); /* Color para los títulos de las tarjetas */
+  font-size: 1.8em;
+  margin-bottom: 15px;
+}
+
+.card-text {
+  color: var(--text-medium); /* Color para el texto de las tarjetas */
+}
+
+/* Puedes eliminar cualquier media query que tuvieras aquí para las cards,
+   ya que Bootstrap con col-12 y col-md-4 lo maneja. */
