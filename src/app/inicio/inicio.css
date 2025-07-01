@@ -63,7 +63,7 @@
 
 /* --- Features/Pillars Section Styles (AJUSTADO) --- */
 .features-section {
-  padding-top: var(--spacing-xl); /* Espacio superior de la sección (60px) */
+/*padding-top: var(--spacing-xl); /* Espacio superior de la sección (60px) */
   padding-bottom: var(--spacing-xl); /* Espacio inferior de la sección (60px) */
   background-color: var(--light-blue-bg); /* Fondo gris claro para esta sección */
 }

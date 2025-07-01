@@ -1,11 +1,11 @@
 <mat-toolbar color="primary" class="app-toolbar">
-  <span class="spacer"></span>
   <nav class="desktop-nav">
     <button mat-button [routerLink]="['/']">Inicio</button>
     <button mat-button [routerLink]="['/nosotros']">Nosotros</button>
     <button mat-button [routerLink]="['/servicios']">Servicios</button>
     <button mat-button [routerLink]="['/contacto']">Contacto</button>
   </nav>
+
   <button mat-icon-button class="mobile-menu-button" (click)="toggleMobileMenu()">
     <mat-icon>menu</mat-icon>
   </button>
@@ -17,7 +17,6 @@
   <button mat-button [routerLink]="['/servicios']" (click)="closeMobileMenu()">Servicios</button>
   <button mat-button [routerLink]="['/contacto']" (click)="closeMobileMenu()">Contacto</button>
 </nav>
-
 
 <main class="app-main-content">
   <div [@routeAnimations]="prepareRoute(outlet)" class="router-outlet-wrapper">
