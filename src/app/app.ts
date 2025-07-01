@@ -55,7 +55,7 @@ import {
   ]
 })
 export class App implements OnInit { // Asegúrate de implementar OnInit si usas ngOnInit
-  protected title = 'mi-emprendimiento';
+  protected title = 'AnalyticsDevs';
   isMobileMenuOpen = false;
   currentYear!: number;
 
