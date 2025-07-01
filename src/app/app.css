@@ -1,4 +1,14 @@
-/* Estilos para el toolbar principal */
+/* src/app/app.css */
+
+/* Variables CSS (si las tienes en styles.css, no las repitas aquí) */
+:root {
+  --primary-blue: #1976d2; /* Azul Material Primary */
+  --secondary-blue: #2196f3; /* Azul Material Light */
+  --text-light: #ffffff;
+  --text-dark: #333333;
+}
+
+/* Estilos para la Toolbar (Navbar) */
 .app-toolbar {
     display: flex;
     justify-content: center; /* Centra el contenido horizontalmente */
@@ -7,7 +17,11 @@
     padding: 0 24px;         /* Padding horizontal, ajusta si es necesario */
 }
 
-/* Estilos para la navegación de escritorio */
+.toolbar-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
 .desktop-nav {
     display: flex;
     gap: 20px; /* Añade espacio entre los botones de navegación */
@@ -16,12 +30,11 @@
     justify-content: center; /* Centra los botones dentro de desktop-nav */
 }
 
-/* Ocultar el botón del menú móvil en desktop */
+/* Menú Móvil */
 .mobile-menu-button {
-    display: none;
+  display: none; /* Oculto por defecto en desktop */
 }
 
-/* Estilos para la navegación móvil (cuando está activa) */
 .mobile-nav {
     display: flex;
     flex-direction: column;
@@ -40,97 +53,196 @@
 }
 
 .mobile-nav button {
-    width: 100%;
-    text-align: left;
-    padding: 15px 20px;
-    color: white; /* Color de texto para los botones móviles */
-    border-radius: 0;
+  width: 100%;
+  text-align: left;
+  padding: 15px 20px;
+  color: var(--text-light);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-/* Media query para pantallas más pequeñas (móvil) */
 @media (max-width: 768px) { /* Ajusta este breakpoint si es necesario */
     .desktop-nav {
         display: none; /* Oculta la navegación de escritorio en móviles */
     }
-
-    .mobile-menu-button {
-        display: block; /* Muestra el botón del menú móvil en móviles */
-        margin-left: auto; /* Empuja el botón del menú móvil a la derecha si no hay logo */
-    }
-
-    .app-toolbar {
-        justify-content: space-between; /* Para que el logo (si lo hay) y el botón móvil estén en los extremos */
-    }
-
-    /* Si tienes un logo y quieres que la navegación móvil se centre alrededor de él */
-    .app-toolbar h1 { /* Asume que tienes un h1 para el logo/título */
+     .app-toolbar h1 { /* Asume que tienes un h1 para el logo/título */
         flex-grow: 1; /* Ocupa el espacio restante */
     }
+  }
+.mobile-nav button:last-child {
+  border-bottom: none;
+}
+
+/* --- Estilos para el Contenedor Principal (main-content) --- */
+.app-main-content {
+  padding: 20px 0; /* Padding arriba y abajo */
+  /* Ajusta el min-height según la altura de tu toolbar y footer */
+  min-height: calc(100vh - 64px - 120px); /* Ejemplo: 100vh - (altura toolbar) - (altura footer) */
+  overflow-x: hidden; /* ¡Importante! Previene la barra de scroll horizontal durante las animaciones */
+  position: relative; /* Asegura que si usas posición absoluta dentro, sea respecto a este contenedor */
+}
+
+/* --- Estilos para el Contenedor del Router Outlet (CRUCIAL para las animaciones) --- */
+
+
+.toolbar-centered { /* La clase del contenedor padre */
+  display: flex;
+  justify-content: center; /* ¡Esto centrará el logo Y la navegación! */
+  align-items: center; /* Centra verticalmente también */
+}
+
+/* --- Estilos para la Sección de Llamada a la Acción Global --- */
+.global-call-to-action {
+  background-color: var(--secondary-blue);
+  color: var(--text-light);
+  padding: 60px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.global-call-to-action h2 {
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.global-call-to-action p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.global-call-to-action button {
+  padding: 12px 30px;
+  font-size: 1.1em;
+  border-radius: 5px;
+  background-color: #ff4081; /* Usando el accent de indigo-pink */
+  color: white;
+  transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
+}
+
+.global-call-to-action button:hover {
+  background-color: #ff6e9a;
+  transform: translateY(-2px);
 }
 
 
-/* Aquí puedes añadir o modificar tus estilos existentes para el resto de la página */
-/* Por ejemplo, para el footer */
+/* --- Estilos para el Footer --- */
 .app-footer {
-    background-color: #333; /* Color de fondo oscuro para el footer */
-    color: #fff; /* Color de texto claro */
-    padding: 40px 20px;
+  background-color: var(--primary-blue);
+  color: var(--text-light);
+  padding: 40px 0;
+  font-size: 0.9em;
 }
 
 .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
 }
 
-.footer-col h3, .footer-col h4 {
-    color: var(--mdc-theme-accent); /* Color de acento para los títulos del footer */
-    margin-bottom: 15px;
+.footer-col h3.footer-logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-light);
 }
 
+.footer-col h4 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: var(--text-light);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 5px;
+}
+
+.footer-col p,
 .footer-col ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-col ul li {
+  margin-bottom: 8px;
 }
 
 .footer-col ul li a {
-    color: #ccc;
-    text-decoration: none;
-    line-height: 1.8;
-    transition: color 0.3s ease;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
 .footer-col ul li a:hover {
-    color: var(--mdc-theme-accent);
+  color: var(--secondary-blue);
 }
 
 .social-links {
-    display: flex;
-    gap: 15px;
-    margin-top: 10px;
+  display: flex; /* Para que los iconos estén en línea */
+  gap: 10px; /* Espacio entre iconos */
 }
 
-.social-media-icon {
-    color: #fff;
-    font-size: 24px;
-    transition: color 0.3s ease;
+.social-media-icon { /* Estilos para los iconos de Material SVG */
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  vertical-align: middle;
+  color: var(--text-light); /* Color de los iconos */
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 .social-media-icon:hover {
-    color: var(--mdc-theme-accent);
+  opacity: 1;
+  color: var(--secondary-blue); /* Cambia de color al pasar el ratón */
 }
 
 .footer-bottom-text {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* --- Responsive para Navbar y Footer --- */
+@media (max-width: 768px) {
+  .desktop-nav {
+      display: none;
+    justify-content: center; /* Centra horizontalmente los elementos hijos */
+    align-items: center;     /* Centra verticalmente si los elementos tienen diferentes alturas */
+    width: 100%;        
+  }
+
+  .mobile-menu-button {
+    display: block; /* Muestra el botón de menú móvil */
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
     text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #555;
-    color: #ccc;
-    font-size: 0.9em;
+  }
+  .footer-col h4 {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .social-links {
+    justify-content: center; /* Centra los iconos en móvil */
+    margin-top: 15px;
+  }
+
+  .global-call-to-action h2 {
+    font-size: 2em;
+  }
+  .global-call-to-action p {
+    font-size: 1em;
+  }
 }
