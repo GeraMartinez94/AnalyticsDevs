@@ -5,7 +5,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms'; // <-- IMPORTANTE
 import {
   trigger,
   transition,
@@ -25,6 +25,7 @@ import {
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
+    FormsModule
   ],
   templateUrl: './app.html', // O './app.component.html' si usas esa convención
   styleUrl: './app.css',     // O './app.component.scss' si usas SCSS
