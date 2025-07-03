@@ -1,38 +1,10 @@
-.contact-section {
-  padding: 60px 0;
-  background-color: #fff;
-}
-
-.page-title {
-  font-size: 3em;
-  font-weight: bold;
-  color: #3f51b5; /* Color primario de Indigo-Pink */
-  margin-bottom: 30px;
-}
-
-.page-description {
-  font-size: 1.1em;
-  color: #555;
-  max-width: 900px;
-  margin: 0 auto 40px;
-  line-height: 1.6;
-}
-
+/* Estilos para centralizar el formulario */
 .contact-form-card {
-  max-width: 600px;
-  margin: 0 auto 50px;
-  padding: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease-out;
-}
-.contact-form-card:hover {
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+  max-width: 600px; /* Define un ancho máximo para el formulario */
+  margin: 20px auto; /* Centra la tarjeta horizontalmente y añade margen vertical */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tarjeta */
+  border-radius: 8px; /* Bordes redondeados */
 }
 
 .full-width-input {
@@ -42,42 +14,37 @@
 .contact-form button {
   width: 100%;
   padding: 10px 0;
-  font-size: 1.1em;
-  margin-top: 10px;
-  transition: transform 0.2s ease-out, background-color 0.2s ease-out;
 }
-.contact-form button:hover {
-  transform: translateY(-2px);
+
+/* Asegura que el contenido del contenedor principal también esté centrado si es necesario */
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos hijos horizontalmente */
+  text-align: center; /* Centra el texto dentro de los elementos */
+}
+
+.page-title {
+  margin-bottom: 10px;
+}
+
+.page-description {
+  margin-bottom: 30px;
+  max-width: 700px; /* Para que la descripción no sea demasiado ancha */
 }
 
 .contact-info {
   margin-top: 40px;
-  color: #555;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
 }
 
 .contact-info-title {
-  font-size: 1.6em;
+  font-size: 1.1em;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .contact-detail {
-  font-size: 1.1em;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 768px) {
-  .page-title {
-    font-size: 2.5em;
-  }
-  .page-description {
-    font-size: 1em;
-  }
-  .contact-form-card {
-    padding: 15px;
-  }
-  .contact-form {
-    gap: 15px;
-  }
-  
+  margin: 5px 0;
 }
