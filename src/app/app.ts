@@ -1,94 +1,72 @@
-import { CommonModule } from '@angular/common'; // Necesario para directivas como *ngIf, *ngFor
-import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router'; // RouterLink para el nav, RouterOutlet para el contenido de la ruta
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // <-- IMPORTANTE
+import { Component } from '@angular/core';
 import {
   trigger,
   transition,
   style,
   query,
-  animate, // <-- Aquí está el módulo animate
   group,
-  animateChild
-} from '@angular/animations';
+  animate,
+} from '@angular/animations'; // Asegúrate de importar los elementos necesarios
+import { RouterOutlet } from '@angular/router'; // Asegúrate de importar RouterOutlet
+
+// Importaciones de Angular Material que usa app.component.html
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common'; // Para ngIf, ngFor si los usas
+import { RouterModule } from '@angular/router'; // Para routerLink, routerLinkActive
+
+
+// Define la animación de transición de página
+export const routeAnimations = trigger('routeAnimations', [
+  transition('* <=> *', [ // Aplica a cualquier transición de ruta
+    style({ position: 'relative' }),
+    query(':enter, :leave', [
+      style({
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        opacity: 0, // Inicia invisible
+        transform: 'translateX(100%)', // Viene desde la derecha
+      }),
+    ], { optional: true }),
+    query(':leave', [
+      animate('0.3s ease-out', style({
+        opacity: 0,
+        transform: 'translateX(-100%)', // Sale hacia la izquierda
+      })),
+    ], { optional: true }),
+    query(':enter', [
+      animate('0.3s ease-in', style({
+        opacity: 1,
+        transform: 'translateX(0%)', // Entra en su posición final
+      })),
+    ], { optional: true }),
+  ]),
+]);
+
+
 @Component({
   selector: 'app-root',
-  standalone: true, // Esto es CRUCIAL para un componente standalone
-  imports: [
+  templateUrl: './app.html',
+  styleUrls: ['./app.css'],
+  animations: [routeAnimations], // <-- Añade las animaciones aquí
+  standalone: true, // <-- ¡Importante! Marca el componente como standalone
+  imports: [ // <-- Importa aquí todos los módulos que usa tu template de app.component.html
     CommonModule,
-    RouterOutlet, // Permite que <router-outlet> funcione en app.html
-    RouterLink,   // Permite que [routerLink] funcione en app.html
+    RouterModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule,
-    FormsModule
-  ],
-  templateUrl: './app.html', // O './app.component.html' si usas esa convención
-  styleUrl: './app.css',     // O './app.component.scss' si usas SCSS
-   animations: [ // Aquí van tus animaciones de ruta
-    trigger('routeAnimations', [
-      transition('* <=> *', [ // Aplica a todas las transiciones de ruta
-        style({ position: 'relative' }), // Establece la posición relativa para el contenedor
-        query(':enter, :leave', [ // Selecciona los componentes que entran y salen
-          style({
-            position: 'absolute', // Componentes entrando/saliendo se posicionan absolutos
-            top: 0,
-            left: 0,
-            width: '100%',
-            opacity: 0, // Inician o terminan invisibles
-            transform: 'translateX(100%)' // Inician fuera de la pantalla (a la derecha)
-          })
-        ], { optional: true }), // optional: true para evitar errores si no hay :enter o :leave
-        query(':enter', [
-          // DURACIÓN AJUSTADA AQUÍ DE 0.5s A 0.3s
-          animate('0.3s ease-out', style({ opacity: 1, transform: 'translateX(0%)' })) // El componente que entra se desliza y desvanece
-        ], { optional: true }),
-        query(':leave', [ // Anima la salida del componente (se desvanece y va a la izquierda)
-          // DURACIÓN AJUSTADA AQUÍ DE 0.5s A 0.3s
-          animate('0.3s ease-out', style({ opacity: 0, transform: 'translateX(-100%)' }))
-        ], { optional: true })
-      ]),
-    ])
+    MatIconModule
+    // ... otros módulos de Material o componentes que uses directamente en app.component.html
   ]
 })
-export class App implements OnInit { // Asegúrate de implementar OnInit si usas ngOnInit
-  protected title = 'AnalyticsDevs';
-  isMobileMenuOpen = false;
-  currentYear!: number;
+export class AppComponent {
+  title = 'AnalyticsDevs';
+  currentYear: number = new Date().getFullYear();
 
-  constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer) {
-    // Registra tus iconos SVG para Angular Material
-    this.matIconRegistry.addSvgIcon(
-      'linkedin',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('./public/linkedin.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'facebook',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('./public/facebook.svg')
-    );
-    this.matIconRegistry.addSvgIcon(
-      'twitter',
-      this.domSanitizer.bypassSecurityTrustResourceUrl('./public/twitter.svg')
-    );
-  }
-
-  ngOnInit() {
-    this.currentYear = new Date().getFullYear();
-  }
-
-  toggleMobileMenu() {
-    this.isMobileMenuOpen = !this.isMobileMenuOpen;
-  }
-
-  closeMobileMenu() {
-    this.isMobileMenuOpen = false;
-  }
-
-  // Función necesaria para pasar el 'data.animation' al trigger en el HTML
+  // Método para preparar los datos de la ruta (necesario para las animaciones)
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }

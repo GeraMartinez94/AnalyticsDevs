@@ -1,39 +1,41 @@
 <section class="contact-section">
   <div class="content-container text-center">
     <h1 class="page-title">Contáctanos</h1>
-    <p class="page-description">
-      Estamos listos para escuchar tus necesidades y ofrecerte soluciones a medida. Completa el formulario o contáctanos directamente.
-    </p>
+    <h2 class="page-description">
+      Estamos listos para escuchar tus necesidades y ofrecerte soluciones a medida.
+      Completa el formulario o contáctanos directamente.
+    </h2>
+
+    <div class="contact-methods">
+      <p><mat-icon>email</mat-icon> info#40analyticsdevs.com</p>
+      <p><mat-icon>phone</mat-icon> +123 456 7890</p>
+      </div>
 
     <mat-card class="contact-form-card">
       <mat-card-content>
         <form class="contact-form">
           <mat-form-field appearance="outline" class="full-width-input">
             <mat-label>Nombre Completo</mat-label>
-            <input matInput placeholder="Tu nombre">
-          </mat-form-field>
+            <input matInput placeholder="Tu nombre" formControlName="nombre">
+            </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width-input">
             <mat-label>Email</mat-label>
-            <input matInput type="email" placeholder="tu.email@ejemplo.com">
-          </mat-form-field>
+            <input matInput type="email" placeholder="tu.email@ejemplo.com" formControlName="email">
+            </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width-input">
             <mat-label>Mensaje</mat-label>
-            <textarea matInput placeholder="Escribe tu mensaje aquí..." rows="6"></textarea>
-          </mat-form-field>
+            <textarea matInput placeholder="Escribe tu mensaje aquí" rows="5" formControlName="mensaje"></textarea>
+            </mat-form-field>
 
-          <button mat-raised-button color="primary" type="submit">
-            Enviar Mensaje
-          </button>
+          <button mat-raised-button color="primary" type="submit" >Enviar Mensaje</button>
         </form>
       </mat-card-content>
     </mat-card>
 
-    <div class="contact-info">
-      <p class="contact-info-title">También puedes encontrarnos en:</p>
-      <p class="contact-detail">📧geramartinez450&#64;gmail.com</p>
-      <p class="contact-detail">📞 +54 3764 632827</p>
-    </div>
+    <div class="map-section">
+      </div>
+
   </div>
 </section>

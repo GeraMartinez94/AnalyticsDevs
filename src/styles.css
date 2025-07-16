@@ -1,5 +1,11 @@
 /* src/styles.css */
+@import 'aos/dist/aos.css'; /* Colócalo después de @use custom-theme.scss */
 
+/* --- Variables de Diseño --- */
+:root {
+  --primary-blue: #004d7f; /* Azul oscuro para títulos, iconos, toolbar */
+  /* ... resto de tus variables y estilos globales ... */
+}
 /* --- Variables de Diseño --- */
 :root {
   --primary-blue: #004d7f;       /* Azul oscuro para títulos, iconos, toolbar */

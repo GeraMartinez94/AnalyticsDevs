@@ -1,50 +1,87 @@
-/* Estilos para centralizar el formulario */
-.contact-form-card {
-  max-width: 600px; /* Define un ancho máximo para el formulario */
-  margin: 20px auto; /* Centra la tarjeta horizontalmente y añade margen vertical */
-  padding: 20px; /* Espaciado interno */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil para la tarjeta */
-  border-radius: 8px; /* Bordes redondeados */
-}
+.contact-section {
+  padding: 60px 20px;
+  background-color: #f8f8f8;
+  text-align: center;
 
-.full-width-input {
-  width: 100%;
-}
+  .content-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
 
-.contact-form button {
-  width: 100%;
-  padding: 10px 0;
-}
+  .page-title {
+    font-size: 3em;
+    color: #333;
+    margin-bottom: 10px;
+  }
 
-/* Asegura que el contenido del contenedor principal también esté centrado si es necesario */
-.content-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centra los elementos hijos horizontalmente */
-  text-align: center; /* Centra el texto dentro de los elementos */
-}
+  .page-description {
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 40px;
+  }
 
-.page-title {
-  margin-bottom: 10px;
-}
+  .contact-methods {
+    margin-bottom: 40px;
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+      color: #555;
+      mat-icon {
+        margin-right: 8px;
+        color: #007bff;
+      }
+    }
+  }
 
-.page-description {
-  margin-bottom: 30px;
-  max-width: 700px; /* Para que la descripción no sea demasiado ancha */
-}
+  .contact-form-card {
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: white;
 
-.contact-info {
-  margin-top: 40px;
-  padding-top: 20px;
-  border-top: 1px solid #eee;
-}
+    .contact-form {
+      padding: 20px;
+    }
 
-.contact-info-title {
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
+    .full-width-input {
+      width: 100%;
+      margin-bottom: 20px;
+    }
 
-.contact-detail {
-  margin: 5px 0;
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px 0;
+      font-size: 1.1em;
+      border-radius: 5px;
+    }
+  }
+
+  .map-section {
+    margin-top: 40px;
+    iframe {
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 15px;
+
+    .page-title {
+      font-size: 2.5em;
+    }
+
+    .page-description {
+      font-size: 1em;
+    }
+
+    .contact-form-card {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+  }
 }

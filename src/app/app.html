@@ -1,68 +1,32 @@
-<mat-toolbar color="primary" class="app-toolbar">
-  <nav class="desktop-nav">
-    <button mat-button [routerLink]="['/']">Inicio</button>
-    <button mat-button [routerLink]="['/nosotros']">Nosotros</button>
-    <button mat-button [routerLink]="['/servicios']">Servicios</button>
-    <button mat-button [routerLink]="['/contacto']">Contacto</button>
-  </nav>
+<header>
+  <mat-toolbar color="primary" class="header-toolbar">
+    <a routerLink="/" class="logo">
+      AnalyticsDevs
+    </a>
+    <span class="spacer"></span>
+    <nav class="main-nav">
+      <button mat-button routerLink="/inicio" routerLinkActive="active-link">Inicio</button>
+      <button mat-button routerLink="/nosotros" routerLinkActive="active-link">Nosotros</button>
+      <button mat-button routerLink="/servicios" routerLinkActive="active-link">Servicios</button>
+      <button mat-button routerLink="/contacto" routerLinkActive="active-link">Contacto</button>
+    </nav>
+    </mat-toolbar>
+</header>
 
-  <button mat-icon-button class="mobile-menu-button" (click)="toggleMobileMenu()">
-    <mat-icon>menu</mat-icon>
-  </button>
-</mat-toolbar>
-
-<nav [class.open]="isMobileMenuOpen" class="mobile-nav">
-  <button mat-button [routerLink]="['/']" (click)="closeMobileMenu()">Inicio</button>
-  <button mat-button [routerLink]="['/nosotros']" (click)="closeMobileMenu()">Nosotros</button>
-  <button mat-button [routerLink]="['/servicios']" (click)="closeMobileMenu()">Servicios</button>
-  <button mat-button [routerLink]="['/contacto']" (click)="closeMobileMenu()">Contacto</button>
-</nav>
-
-<main class="app-main-content">
-  <div [@routeAnimations]="prepareRoute(outlet)" class="router-outlet-wrapper">
-    <router-outlet #outlet="outlet"></router-outlet>
+<main class="main-content">
+  <div [@routeAnimations]="prepareRoute(routerOutlet)" class="router-animation-container">
+    <router-outlet #routerOutlet="outlet"></router-outlet>
   </div>
 </main>
 
-<section class="global-call-to-action">
-  <div class="content-container text-center">
-    <h2>¿Listo para llevar tu negocio al siguiente nivel?</h2>
-    <p>Contáctanos hoy mismo para una consulta gratuita y descubre cómo podemos ayudarte.</p>
-    <button mat-raised-button color="accent" [routerLink]="['/contacto']" fragment="formulario-contacto">¡Hablemos!</button>
-  </div>
-</section>
-
 <footer class="app-footer">
-  <div class="footer-container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h3 class="footer-logo">{{ title }}</h3>
-        <p>Soluciones innovadoras para el crecimiento de tu negocio.</p>
+  <div class="footer-content">
+    <p>&copy; {{ currentYear }} AnalyticsDevs. Todos los derechos reservados.</p>
+    <div class="social-links">
+      <a href="https://facebook.com/tupagina" target="_blank" aria-label="Facebook de AnalyticsDevs">
+        <mat-icon svgIcon="facebook"></mat-icon> </a>
+      <a href="https://linkedin.com/company/tuempresa" target="_blank" aria-label="LinkedIn de AnalyticsDevs">
+        <mat-icon svgIcon="linkedin"></mat-icon> </a>
       </div>
-      <div class="footer-col">
-        <h4>Navegación</h4>
-        <ul>
-          <li><a [routerLink]="['/']">Inicio</a></li>
-          <li><a [routerLink]="['/nosotros']">Nosotros</a></li>
-          <li><a [routerLink]="['/servicios']">Servicios</a></li>
-          <li><a [routerLink]="['/contacto']">Contacto</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contacto</h4>
-        <p>Email: geramartinez450&#64;gmail.com</p>
-        <p>Dirección: Posadas, Misiones, Argentina</p>
-      </div>
- <div class="footer-col">
-        <h4>Síguenos</h4>
-        <a href="https://www.linkedin.com/company/analytics-devs-consulting/" aria-label="LinkedIn">
-            <!-- ¡CAMBIO AQUÍ! Usando el ícono de Font Awesome -->
-            <i class="fab fa-linkedin social-media-icon"></i>
-        </a>
-      </div>
-    </div>
-    <div class="footer-bottom-text">
-      <p>&copy; {{ currentYear }} {{ title }}. Todos los derechos reservados.</p>
-    </div>
   </div>
 </footer>

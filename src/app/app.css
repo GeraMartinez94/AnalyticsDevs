@@ -1,248 +1,184 @@
-/* src/app/app.css */
+/* app.component.css */
 
-/* Variables CSS (si las tienes en styles.css, no las repitas aquí) */
-:root {
-  --primary-blue: #1976d2; /* Azul Material Primary */
-  --secondary-blue: #2196f3; /* Azul Material Light */
-  --text-light: #ffffff;
-  --text-dark: #333333;
+/* Estilos para el Header (mat-toolbar) */
+.header-toolbar {
+  padding: 0 24px; /* Un poco más de padding lateral */
+  height: 64px;    /* Altura estándar de Material Toolbar en escritorio */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil para darle profundidad */
+  position: fixed; /* Hacer el header fijo */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
 }
 
-/* Estilos para la Toolbar (Navbar) */
-.app-toolbar {
-    display: flex;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    align-items: center;     /* Asegura que los elementos estén alineados verticalmente */
-    height: 64px;            /* Altura estándar de Material Toolbar, ajusta si es necesario */
-    padding: 0 24px;         /* Padding horizontal, ajusta si es necesario */
+.header-toolbar .logo {
+  color: white; /* Color del texto del logo */
+  text-decoration: none;
+  font-weight: 700; /* Bold */
+  font-size: 1.8em; /* Tamaño del logo */
+  letter-spacing: 0.05em; /* Espaciado entre letras */
+  transition: color 0.3s ease; /* Transición suave para hover */
 }
 
-.toolbar-brand {
-  font-size: 1.5em;
-  font-weight: bold;
+.header-toolbar .logo:hover {
+  color: rgba(255, 255, 255, 0.8); /* Color más suave al pasar el ratón */
 }
 
-.desktop-nav {
-    display: flex;
-    gap: 20px; /* Añade espacio entre los botones de navegación */
-    /* Este flex-grow: 1; es crucial para que la nav se expanda y empuje el botón de menú móvil a la derecha */
-    flex-grow: 1;
-    justify-content: center; /* Centra los botones dentro de desktop-nav */
+.header-toolbar .spacer {
+  flex: 1 1 auto; /* Empuja los elementos a los extremos */
 }
 
-/* Menú Móvil */
-.mobile-menu-button {
-  display: none; /* Oculto por defecto en desktop */
-}
-
-.mobile-nav {
-    display: flex;
-    flex-direction: column;
-    background-color: var(--mdc-theme-primary); /* Usa el color primario de tu tema de Material */
-    position: absolute;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    /* Ocultar por defecto */
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-in-out;
-}
-
-.mobile-nav.open {
-    transform: translateY(0);
-}
-
-.mobile-nav button {
-  width: 100%;
-  text-align: left;
-  padding: 15px 20px;
-  color: var(--text-light);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-@media (max-width: 768px) { /* Ajusta este breakpoint si es necesario */
-    .desktop-nav {
-        display: none; /* Oculta la navegación de escritorio en móviles */
-    }
-     .app-toolbar h1 { /* Asume que tienes un h1 para el logo/título */
-        flex-grow: 1; /* Ocupa el espacio restante */
-    }
-  }
-.mobile-nav button:last-child {
-  border-bottom: none;
-}
-
-/* --- Estilos para el Contenedor Principal (main-content) --- */
-.app-main-content {
-  padding: 20px 0; /* Padding arriba y abajo */
-  /* Ajusta el min-height según la altura de tu toolbar y footer */
-  min-height: calc(100vh - 64px - 120px); /* Ejemplo: 100vh - (altura toolbar) - (altura footer) */
-  overflow-x: hidden; /* ¡Importante! Previene la barra de scroll horizontal durante las animaciones */
-  position: relative; /* Asegura que si usas posición absoluta dentro, sea respecto a este contenedor */
-}
-
-/* --- Estilos para el Contenedor del Router Outlet (CRUCIAL para las animaciones) --- */
-
-
-.toolbar-centered { /* La clase del contenedor padre */
-  display: flex;
-  justify-content: center; /* ¡Esto centrará el logo Y la navegación! */
-  align-items: center; /* Centra verticalmente también */
-}
-
-/* --- Estilos para la Sección de Llamada a la Acción Global --- */
-.global-call-to-action {
-  background-color: var(--secondary-blue);
-  color: var(--text-light);
-  padding: 60px 0;
-  text-align: center;
-  margin-top: 40px;
-}
-
-.global-call-to-action h2 {
-  font-size: 2.5em;
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.global-call-to-action p {
-  font-size: 1.2em;
-  margin-bottom: 30px;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.global-call-to-action button {
-  padding: 12px 30px;
-  font-size: 1.1em;
-  border-radius: 5px;
-  background-color: #ff4081; /* Usando el accent de indigo-pink */
+.header-toolbar .main-nav button {
   color: white;
-  transition: background-color 0.3s ease-in-out, transform 0.2s ease-out;
+  margin: 0 8px; /* Espacio entre los botones de navegación */
+  font-size: 1.05em; /* Tamaño de fuente ligeramente más grande */
+  padding: 8px 16px; /* Padding interno para los botones */
+  border-radius: 4px; /* Bordes redondeados */
+  transition: background-color 0.3s ease; /* Transición para el hover */
 }
 
-.global-call-to-action button:hover {
-  background-color: #ff6e9a;
-  transform: translateY(-2px);
+.header-toolbar .main-nav button:hover {
+  background-color: rgba(255, 255, 255, 0.15); /* Fondo sutil al pasar el ratón */
+}
+
+.header-toolbar .main-nav button.active-link {
+  background-color: rgba(255, 255, 255, 0.25); /* Fondo para el enlace activo */
+  font-weight: 500; /* Un poco más de peso para el activo */
+}
+
+.header-toolbar .main-nav button {
+  color: white;
+  margin: 0 8px;
+  font-size: 1.05em;
+  padding: 8px 16px;
+  border-radius: 4px;
+  /* Transición para el fondo y la transformación (subrayado) */
+  transition: background-color 0.3s ease, text-decoration 0.3s ease, transform 0.3s ease;
+  position: relative; /* Necesario para posicionar el pseudo-elemento del subrayado */
+  overflow: hidden; /* Oculta el subrayado hasta que se expande */
+  text-decoration: none; /* Asegura que no haya subrayado por defecto si lo hubiera */
+}
+
+/* Efecto de Subrayado al pasar el ratón */
+.header-toolbar .main-nav button::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px; /* Grosor del subrayado */
+  background-color: white; /* Color del subrayado */
+  transform: scaleX(0); /* Inicialmente el subrayado está oculto (escala 0 en X) */
+  transition: transform 0.3s ease-out; /* Transición para la aparición del subrayado */
+  transform-origin: bottom right; /* Origen de la transformación para que aparezca de derecha a izquierda */
+}
+
+.header-toolbar .main-nav button:hover::after {
+  transform: scaleX(1); /* Al pasar el ratón, el subrayado se expande (escala 1 en X) */
+  transform-origin: bottom left; /* Cambia el origen para que desaparezca de izquierda a derecha si sales rápido */
 }
 
 
-/* --- Estilos para el Footer --- */
+/* Estilos para el estado activo (página actual) */
+.header-toolbar .main-nav button.active-link {
+  background-color: rgba(255, 255, 255, 0.25);
+  font-weight: 500;
+  /* Asegura que el enlace activo también tenga el subrayado o un estilo similar */
+}
+/* Opcional: Si quieres que la página activa siempre tenga el subrayado: */
+.header-toolbar .main-nav button.active-link::after {
+  transform: scaleX(1); /* Subrayado visible siempre para la página activa */
+  background-color: white; /* Color del subrayado para la página activa */
+}
+.router-animation-container {
+  position: relative;
+  min-height: calc(100vh - 64px - 56px); /* Altura de la vista menos header y footer */
+  overflow: hidden;
+}
+/* Media Query para pantallas más pequeñas (móviles/tablets) */
+@media (max-width: 768px) {
+  .header-toolbar {
+    padding: 0 16px; /* Reducir padding en móviles */
+    height: 56px; /* Altura estándar de Material Toolbar en móviles */
+  }
+
+  .header-toolbar .main-nav {
+    display: none; /* Ocultar la navegación principal en móviles */
+  }
+}
+
+
+/* Estilos para el Contenido Principal */
+.main-content {
+  flex-grow: 1; /* Permite que el contenido principal ocupe el espacio restante */
+  padding-top: 64px; /* Offset para el header fijo (misma altura que .header-toolbar) */
+}
+
+/* Ajuste para el offset en móviles si el header cambia de altura */
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 56px; /* Offset para el header fijo en móviles */
+  }
+}
+
+
+/* Estilos para el Footer */
 .app-footer {
-  background-color: var(--primary-blue);
-  color: var(--text-light);
-  padding: 40px 0;
-  font-size: 0.9em;
+  background-color: #2c3e50; /* Un color oscuro para el footer (ej. azul muy oscuro/gris) */
+  color: #ecf0f1; /* Color de texto claro para contraste */
+  padding: 30px 24px; /* Padding vertical y lateral */
+  text-align: center;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* Sombra superior sutil */
 }
 
-.footer-container {
+.app-footer .footer-content {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
 
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 30px;
-  margin-bottom: 30px;
-}
-
-.footer-col h3.footer-logo {
-  font-size: 1.8em;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: var(--text-light);
-}
-
-.footer-col h4 {
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: var(--text-light);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 5px;
-}
-
-.footer-col p,
-.footer-col ul {
+.app-footer .footer-content p {
   margin: 0;
-  padding: 0;
-  list-style: none;
+  font-size: 0.95em;
+  line-height: 1.5;
 }
 
-.footer-col ul li {
-  margin-bottom: 8px;
+.app-footer .footer-content .social-links {
+  display: flex;
+  gap: 15px; /* Espacio entre iconos */
 }
 
-.footer-col ul li a {
-  color: var(--text-light);
-  text-decoration: none;
-  transition: color 0.3s ease-in-out;
+.app-footer .footer-content .social-links a {
+  color: #ecf0f1; /* Color de los iconos sociales */
+  font-size: 1.8em; /* Tamaño de los iconos */
+  transition: color 0.3s ease; /* Transición suave para hover */
 }
 
-.footer-col ul li a:hover {
-  color: var(--secondary-blue);
+.app-footer .footer-content .social-links a:hover {
+  /* Aquí usaría el color de acento de tu tema Material.
+     Como es CSS puro, lo hardcodeo o asumo que tus variables globales
+     como --secondary-blue están disponibles desde styles.css. */
+  color: #FFC107; /* Un ámbar de ejemplo si no tienes variables CSS globales */
+  /* O si usas variables CSS globales definidas en styles.css: */
+  /* color: var(--secondary-blue); */
 }
 
-.social-links {
-  display: flex; /* Para que los iconos estén en línea */
-  gap: 10px; /* Espacio entre iconos */
-}
-
-.social-media-icon { /* Estilos para los iconos de Material SVG */
-  width: 30px;
-  height: 30px;
-  object-fit: contain;
-  vertical-align: middle;
-  color: var(--text-light); /* Color de los iconos */
-  opacity: 0.8;
-  transition: opacity 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.social-media-icon:hover {
-  opacity: 1;
-  color: var(--secondary-blue); /* Cambia de color al pasar el ratón */
-}
-
-.footer-bottom-text {
-  text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 20px;
-  margin-top: 20px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* --- Responsive para Navbar y Footer --- */
-@media (max-width: 768px) {
-  .desktop-nav {
-      display: none;
-    justify-content: center; /* Centra horizontalmente los elementos hijos */
-    align-items: center;     /* Centra verticalmente si los elementos tienen diferentes alturas */
-    width: 100%;        
-  }
-
-  .mobile-menu-button {
-    display: block; /* Muestra el botón de menú móvil */
-  }
-
-  .footer-grid {
-    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+/* Media Query para el footer en pantallas más pequeñas */
+@media (max-width: 600px) {
+  .app-footer .footer-content {
+    flex-direction: column; /* Apila los elementos verticalmente */
     text-align: center;
-  }
-  .footer-col h4 {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-  .social-links {
-    justify-content: center; /* Centra los iconos en móvil */
-    margin-top: 15px;
+    gap: 15px; /* Espacio entre los elementos apilados */
   }
 
-  .global-call-to-action h2 {
-    font-size: 2em;
+  .app-footer .footer-content p {
+    margin-bottom: 10px; /* Espacio debajo del texto de copyright */
   }
-  .global-call-to-action p {
-    font-size: 1em;
+  .app-footer .footer-content .social-links {
+    margin-top: 10px; /* Espacio encima de los iconos sociales */
   }
 }
