@@ -6,30 +6,39 @@
       Completa el formulario o contáctanos directamente.
     </h2>
 
-    <div class="contact-methods">
-      <p><mat-icon>email</mat-icon> info#40analyticsdevs.com</p>
-      <p><mat-icon>phone</mat-icon> +123 456 7890</p>
-      </div>
+
 
     <mat-card class="contact-form-card">
       <mat-card-content>
-        <form class="contact-form">
+        <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
           <mat-form-field appearance="outline" class="full-width-input">
             <mat-label>Nombre Completo</mat-label>
-            <input matInput placeholder="Tu nombre" formControlName="nombre">
-            </mat-form-field>
+            <input matInput placeholder="Tu nombre" formControlName="nombre" required>
+            <mat-error *ngIf="contactForm.get('nombre')?.hasError('required') && contactForm.get('nombre')?.touched">
+              El nombre es requerido.
+            </mat-error>
+          </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width-input">
             <mat-label>Email</mat-label>
-            <input matInput type="email" placeholder="tu.email@ejemplo.com" formControlName="email">
-            </mat-form-field>
+            <input matInput type="email" placeholder="tu.email@ejemplo.com" formControlName="email" required>
+            <mat-error *ngIf="contactForm.get('email')?.hasError('required') && contactForm.get('email')?.touched">
+              El email es requerido.
+            </mat-error>
+            <mat-error *ngIf="contactForm.get('email')?.hasError('email') && contactForm.get('email')?.touched">
+              Ingresa un email válido.
+            </mat-error>
+          </mat-form-field>
 
           <mat-form-field appearance="outline" class="full-width-input">
             <mat-label>Mensaje</mat-label>
-            <textarea matInput placeholder="Escribe tu mensaje aquí" rows="5" formControlName="mensaje"></textarea>
-            </mat-form-field>
+            <textarea matInput placeholder="Escribe tu mensaje aquí" rows="5" formControlName="mensaje" required></textarea>
+            <mat-error *ngIf="contactForm.get('mensaje')?.hasError('required') && contactForm.get('mensaje')?.touched">
+              El mensaje es requerido.
+            </mat-error>
+          </mat-form-field>
 
-          <button mat-raised-button color="primary" type="submit" >Enviar Mensaje</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="contactForm.invalid">Enviar Mensaje</button>
         </form>
       </mat-card-content>
     </mat-card>
