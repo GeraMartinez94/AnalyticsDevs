@@ -1,3 +1,4 @@
+// src/app/contacto/contacto.component.ts
 import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit, OnDestroy } from '@angular/core'; // <-- Añadido OnDestroy
 import { CommonModule, ViewportScroller } from '@angular/common'; // <-- ViewportScroller movido aquí
 import { ActivatedRoute } from '@angular/router';
